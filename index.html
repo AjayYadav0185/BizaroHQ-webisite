@@ -3,823 +3,489 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BizaroHQ | Digital Records Portal — From Paper to Digital Assets</title>
+<title>BizaroHQ | Digital Records Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <style>
-:root {
-  --primary: #0171d3;
-  --primary-dark: #015db1;
-  --primary-deep: #013f80;
-  --deep-teal: #0d2b33;
-  --accent: #00d2ff;
-  --accent2: #00f5c8;
-  --text-main: #0d1b2a;
-  --text-muted: #4a6072;
-  --text-light: #8fa3b1;
-  --bg-white: #ffffff;
-  --bg-light: #f4f8fc;
-  --bg-card: #ffffff;
-  --border: rgba(1,113,211,0.12);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 4px 24px rgba(1,113,211,0.10);
-  --shadow-lg: 0 16px 48px rgba(1,113,211,0.16);
+:root{
+  --primary:#0171d3;--primary-dark:#015db1;
+  --teal:#0d2b33;--accent:#00d2ff;--accent2:#00f5c8;
+  --text:#0d1b2a;--muted:#4a6072;--light:#8fa3b1;
+  --bg:#f4f8fc;--card:#fff;
+  --border:rgba(1,113,211,0.13);
+  --r:14px;--r-sm:10px;
+  --sh:0 4px 20px rgba(1,113,211,0.10);
+  --sh-lg:0 14px 40px rgba(1,113,211,0.15);
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text-main);
-  background: #fff;
-  overflow-x: hidden;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 /* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 5%;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 68px;
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:0 4%;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-
-.nav-logo {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-icon{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,#0171d3,#00d2ff);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:16px;font-weight:800;font-family:'Sora',sans-serif;
 }
-
-.nav-logo .logo-icon {
-  width: 36px; height: 36px;
-  background: linear-gradient(135deg, #0171d3 0%, #00d2ff 100%);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 18px; font-weight: 800;
-  font-family: 'Sora', sans-serif;
+.nav-logo span{font-family:'Sora',sans-serif;font-weight:700;font-size:19px;color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-ghost{
+  padding:8px 18px;border:1.5px solid var(--border);border-radius:8px;
+  font-size:14px;font-weight:500;color:var(--primary);text-decoration:none;
+  background:transparent;transition:all .2s;white-space:nowrap;
 }
-
-.nav-logo span {
-  font-family: 'Sora', sans-serif;
-  font-weight: 700; font-size: 20px;
-  color: var(--deep-teal);
+.btn-ghost:hover{background:var(--bg);border-color:var(--primary)}
+.btn-primary{
+  padding:9px 20px;background:var(--primary);color:#fff;border:none;
+  border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
 }
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.hamburger{display:none;font-size:26px;cursor:pointer;color:var(--teal);line-height:1}
 
-.nav-links {
-  display: flex; align-items: center; gap: 32px;
-  list-style: none;
+/* mobile drawer */
+.mobile-menu{
+  display:none;flex-direction:column;
+  background:#fff;border-top:1px solid var(--border);
+  padding:12px 4% 20px;
+  position:fixed;top:60px;left:0;right:0;
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);z-index:199;
 }
-
-.nav-links a {
-  text-decoration: none; color: var(--text-muted);
-  font-size: 14px; font-weight: 500;
-  transition: color 0.2s;
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  text-decoration:none;font-size:15px;color:var(--muted);
+  padding:12px 4px;border-bottom:1px solid var(--bg);
 }
-
-.nav-links a:hover { color: var(--primary); }
-
-.nav-cta {
-  display: flex; align-items: center; gap: 12px;
-}
-
-.btn-ghost {
-  padding: 9px 20px; border: 1.5px solid var(--border);
-  border-radius: 8px; font-size: 14px; font-weight: 500;
-  color: var(--primary); text-decoration: none;
-  transition: all 0.2s;
-  background: transparent;
-  cursor: pointer;
-}
-
-.btn-ghost:hover { background: var(--bg-light); border-color: var(--primary); }
-
-.btn-primary {
-  padding: 10px 22px;
-  background: var(--primary);
-  color: white; border: none;
-  border-radius: 8px; font-size: 14px; font-weight: 600;
-  text-decoration: none; cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(1,113,211,0.3); }
-
-.hamburger { display: none; font-size: 24px; cursor: pointer; color: var(--deep-teal); }
+.mobile-menu a:last-child{border:none;color:var(--primary);font-weight:600;margin-top:4px}
 
 /* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  background: var(--deep-teal);
-  position: relative;
-  display: flex; align-items: center;
-  padding: 100px 5% 80px;
-  overflow: hidden;
+.hero{
+  min-height:100svh;background:var(--teal);
+  position:relative;display:flex;align-items:center;
+  padding:80px 4% 60px;overflow:hidden;
 }
-
-.hero-bg-pattern {
-  position: absolute; inset: 0;
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 50%,rgba(0,210,255,.08) 0%,transparent 50%),
+    radial-gradient(circle at 80% 20%,rgba(1,113,211,.14) 0%,transparent 45%);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(0,210,255,0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(1,113,211,0.15) 0%, transparent 45%),
-    radial-gradient(circle at 60% 80%, rgba(0,245,200,0.05) 0%, transparent 40%);
-  pointer-events: none;
+    linear-gradient(rgba(1,113,211,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(1,113,211,.05) 1px,transparent 1px);
+  background-size:55px 55px;
 }
-
-.hero-grid {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(1,113,211,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(1,113,211,0.06) 1px, transparent 1px);
-  background-size: 60px 60px;
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:1160px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;
 }
-
-.hero-content {
-  position: relative; z-index: 2;
-  max-width: 1200px; margin: 0 auto; width: 100%;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; align-items: center;
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,210,255,.12);border:1px solid rgba(0,210,255,.25);
+  padding:5px 13px;border-radius:50px;
+  color:var(--accent);font-size:12px;font-weight:500;margin-bottom:20px;
 }
-
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(0,210,255,0.12);
-  border: 1px solid rgba(0,210,255,0.25);
-  padding: 6px 14px; border-radius: 50px;
-  color: var(--accent); font-size: 13px; font-weight: 500;
-  margin-bottom: 24px;
+.hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-title{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(30px,4.2vw,56px);font-weight:800;line-height:1.12;
+  color:#fff;margin-bottom:18px;
 }
-
-.hero-badge span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse-dot 2s infinite; }
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+.hero-title .grad{
+  background:linear-gradient(90deg,#00d2ff,#00f5c8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-
-.hero-title {
-  font-family: 'Sora', sans-serif;
-  font-size: clamp(36px, 4.5vw, 58px);
-  font-weight: 800; line-height: 1.12;
-  color: #ffffff;
-  margin-bottom: 20px;
+.hero-sub{font-size:16px;line-height:1.7;color:rgba(255,255,255,.65);margin-bottom:32px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-hp{
+  padding:13px 26px;background:linear-gradient(135deg,#0171d3,#00a8d4);
+  color:#fff;font-size:15px;font-weight:600;border-radius:10px;
+  text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+  box-shadow:0 8px 22px rgba(1,113,211,.32);transition:all .3s;
 }
-
-.hero-title .gradient-text {
-  background: linear-gradient(90deg, #00d2ff, #00f5c8);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+.btn-hp:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(1,113,211,.42)}
+.btn-hg{
+  padding:13px 24px;border:1.5px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.85);font-size:15px;font-weight:500;border-radius:10px;
+  text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all .2s;
 }
+.btn-hg:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.stat-num{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:#fff}
+.stat-lbl{font-size:12px;color:rgba(255,255,255,.5);margin-top:2px}
 
-.hero-subtitle {
-  font-size: 17px; line-height: 1.7;
-  color: rgba(255,255,255,0.65);
-  margin-bottom: 36px; max-width: 480px;
+/* dashboard mockup */
+.hero-visual{position:relative}
+.dash-card{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  border-radius:18px;padding:22px;backdrop-filter:blur(10px);
 }
-
-.hero-actions {
-  display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px;
+.dash-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.dash-title{font-family:'Sora',sans-serif;color:#fff;font-size:13px;font-weight:600}
+.dash-live{
+  background:rgba(0,210,255,.15);color:var(--accent);
+  border:1px solid rgba(0,210,255,.25);font-size:11px;padding:2px 10px;border-radius:50px;
 }
-
-.btn-hero-primary {
-  padding: 14px 30px;
-  background: linear-gradient(135deg, #0171d3, #00a8d4);
-  color: white; font-size: 15px; font-weight: 600;
-  border-radius: 10px; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: all 0.3s;
-  box-shadow: 0 8px 24px rgba(1,113,211,0.35);
+.dash-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.mbox{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:12px 8px;text-align:center;
 }
-
-.btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(1,113,211,0.45); }
-
-.btn-hero-ghost {
-  padding: 14px 28px;
-  border: 1.5px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.85);
-  font-size: 15px; font-weight: 500;
-  border-radius: 10px; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: all 0.2s;
+.mbox .mv{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:#fff}
+.mbox .ml{font-size:10px;color:rgba(255,255,255,.4);margin-top:2px}
+.jobs{display:flex;flex-direction:column;gap:7px}
+.job-row{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);border-radius:9px;padding:9px 11px;
 }
-
-.btn-hero-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.35); }
-
-.hero-stats {
-  display: flex; gap: 36px;
+.jdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dg{background:#00f5c8}.da{background:#f5a623}.db{background:#00d2ff}
+.jinfo{flex:1;min-width:0}
+.jn{font-size:12px;color:rgba(255,255,255,.85);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.js2{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.jst{font-size:10px;font-weight:600;padding:2px 9px;border-radius:50px;white-space:nowrap}
+.st-done{background:rgba(0,245,200,.15);color:#00f5c8}
+.st-prog{background:rgba(245,166,35,.15);color:#f5a623}
+.st-wait{background:rgba(0,210,255,.15);color:#00d2ff}
+/* float cards */
+.fc{
+  position:absolute;background:#fff;border-radius:12px;
+  padding:10px 14px;box-shadow:0 12px 32px rgba(0,0,0,.22);
+  display:flex;align-items:center;gap:9px;
 }
-
-.stat-item .stat-num {
-  font-family: 'Sora', sans-serif;
-  font-size: 28px; font-weight: 800; color: white;
+.fc-tl{top:-18px;left:-24px}
+.fc-br{bottom:-18px;right:-16px}
+.fc-ico{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
 }
+.ico-b{background:#e6f1fb}.ico-g{background:#eaf3de}
+.fc-main{font-size:12px;font-weight:700;color:var(--teal)}
+.fc-sub{font-size:10px;color:var(--muted)}
 
-.stat-item .stat-label {
-  font-size: 13px; color: rgba(255,255,255,0.5);
-  margin-top: 2px;
+/* ── COMMON ── */
+section{padding:72px 4%}
+.wrap{max-width:1160px;margin:0 auto}
+.sec-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary);margin-bottom:12px;
 }
-
-/* hero right – dashboard mockup */
-.hero-visual {
-  position: relative;
+.sec-label::before{content:'';display:block;width:18px;height:2px;background:var(--primary);border-radius:2px}
+.sec-title{
+  font-family:'Sora',sans-serif;font-size:clamp(24px,3vw,40px);
+  font-weight:800;line-height:1.2;color:var(--teal);margin-bottom:14px;
 }
+.sec-sub{font-size:15px;line-height:1.7;color:var(--muted);max-width:520px}
 
-.dashboard-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 20px;
-  padding: 24px;
-  backdrop-filter: blur(10px);
+/* ── TRUST BAR ── */
+.trust-bar{
+  background:var(--bg);padding:22px 4%;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
 }
-
-.dash-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 20px;
+.trust-inner{
+  max-width:1160px;margin:0 auto;
+  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
 }
-
-.dash-title {
-  font-family: 'Sora', sans-serif;
-  color: white; font-size: 14px; font-weight: 600;
+.trust-lbl{font-size:12px;color:var(--light);white-space:nowrap;font-weight:500}
+.trust-logos{display:flex;align-items:center;gap:28px;flex-wrap:wrap;flex:1}
+.tlogo{
+  font-family:'Sora',sans-serif;font-weight:700;font-size:13px;
+  color:var(--light);display:flex;align-items:center;gap:6px;
 }
-
-.dash-badge {
-  background: rgba(0,210,255,0.15); color: var(--accent);
-  border: 1px solid rgba(0,210,255,0.25);
-  font-size: 11px; padding: 3px 10px; border-radius: 50px;
-}
-
-.dash-metrics {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-  margin-bottom: 20px;
-}
-
-.metric-box {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px; padding: 14px 12px; text-align: center;
-}
-
-.metric-box .m-val {
-  font-family: 'Sora', sans-serif;
-  font-size: 22px; font-weight: 700; color: white;
-}
-
-.metric-box .m-lbl {
-  font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px;
-}
-
-.dash-joblist { display: flex; flex-direction: column; gap: 8px; }
-
-.job-row {
-  display: flex; align-items: center; gap: 12px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px; padding: 10px 12px;
-}
-
-.job-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.dot-green { background: #00f5c8; }
-.dot-amber { background: #f5a623; }
-.dot-blue { background: #00d2ff; }
-
-.job-info { flex: 1; }
-.job-info .j-name { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500; }
-.job-info .j-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-.job-status { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 50px; }
-.status-done { background: rgba(0,245,200,0.15); color: #00f5c8; }
-.status-prog { background: rgba(245,166,35,0.15); color: #f5a623; }
-.status-wait { background: rgba(0,210,255,0.15); color: #00d2ff; }
-
-/* floating cards */
-.float-card {
-  position: absolute;
-  background: white; border-radius: 14px;
-  padding: 12px 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-  display: flex; align-items: center; gap: 10px;
-}
-
-.float-card-tl {
-  top: -20px; left: -30px;
-}
-
-.float-card-br {
-  bottom: -20px; right: -20px;
-}
-
-.float-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-
-.fc-blue { background: #e6f1fb; }
-.fc-green { background: #eaf3de; }
-
-.float-text .ft-main { font-size: 13px; font-weight: 700; color: var(--deep-teal); }
-.float-text .ft-sub { font-size: 11px; color: var(--text-muted); }
-
-/* ── SECTION COMMON ── */
-section { padding: 90px 5%; }
-
-.section-inner { max-width: 1200px; margin: 0 auto; }
-
-.section-label {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--primary);
-  margin-bottom: 14px;
-}
-
-.section-label::before {
-  content: ''; display: block;
-  width: 20px; height: 2px;
-  background: var(--primary); border-radius: 2px;
-}
-
-.section-title {
-  font-family: 'Sora', sans-serif;
-  font-size: clamp(28px, 3vw, 42px);
-  font-weight: 800; line-height: 1.2;
-  color: var(--deep-teal);
-  margin-bottom: 16px;
-}
-
-.section-sub {
-  font-size: 16px; line-height: 1.7;
-  color: var(--text-muted);
-  max-width: 560px;
-}
-
-/* ── LOGOS / TRUST ── */
-.trust-bar {
-  background: var(--bg-light);
-  padding: 28px 5%;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.trust-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; gap: 48px;
-  flex-wrap: wrap;
-}
-
-.trust-label {
-  font-size: 13px; color: var(--text-light);
-  white-space: nowrap; font-weight: 500;
-}
-
-.trust-logos {
-  display: flex; align-items: center; gap: 40px;
-  flex-wrap: wrap; flex: 1;
-}
-
-.trust-logo {
-  font-family: 'Sora', sans-serif;
-  font-weight: 700; font-size: 14px;
-  color: var(--text-light);
-  display: flex; align-items: center; gap: 6px;
-  letter-spacing: -0.3px;
-}
-
-.trust-logo i { font-size: 20px; color: rgba(1,113,211,0.35); }
+.tlogo i{font-size:18px;color:rgba(1,113,211,.3)}
 
 /* ── FEATURES ── */
-.features-section { background: white; }
-
-.features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px; margin-top: 56px;
+.feat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;
 }
-
-.feat-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 32px 28px;
-  transition: all 0.3s;
-  position: relative; overflow: hidden;
+.feat-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r);
+  padding:28px 24px;transition:all .3s;position:relative;overflow:hidden;
 }
-
-.feat-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.3s;
+.feat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
 }
-
-.feat-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: rgba(1,113,211,0.2); }
-.feat-card:hover::before { transform: scaleX(1); }
-
-.feat-icon {
-  width: 52px; height: 52px; border-radius: 14px;
-  background: linear-gradient(135deg, rgba(1,113,211,0.1), rgba(0,210,255,0.08));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px; color: var(--primary);
-  margin-bottom: 20px;
+.feat-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:rgba(1,113,211,.2)}
+.feat-card:hover::before{transform:scaleX(1)}
+.feat-ico{
+  width:48px;height:48px;border-radius:13px;
+  background:linear-gradient(135deg,rgba(1,113,211,.1),rgba(0,210,255,.08));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;color:var(--primary);margin-bottom:18px;
 }
-
-.feat-title {
-  font-family: 'Sora', sans-serif;
-  font-size: 17px; font-weight: 700;
-  color: var(--deep-teal); margin-bottom: 10px;
-}
-
-.feat-desc { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
+.feat-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--teal);margin-bottom:8px}
+.feat-desc{font-size:13px;line-height:1.65;color:var(--muted)}
 
 /* ── HOW IT WORKS ── */
-.how-section { background: var(--bg-light); }
-
-.how-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 64px; align-items: center; margin-top: 56px;
+.how-section{background:var(--bg)}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:48px}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{
+  width:42px;height:42px;border-radius:11px;flex-shrink:0;
+  background:#fff;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--primary);
+  transition:all .3s;
 }
-
-.steps-list { display: flex; flex-direction: column; gap: 0; }
-
-.step-item {
-  display: flex; gap: 20px; padding: 24px 0;
-  border-bottom: 1px solid var(--border);
-  position: relative;
+.step:hover .step-num{background:var(--primary);color:#fff;border-color:var(--primary)}
+.s-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--teal);margin-bottom:5px}
+.s-desc{font-size:13px;color:var(--muted);line-height:1.6}
+/* phone */
+.phone{
+  background:var(--teal);border-radius:26px;padding:20px 16px;
+  border:7px solid #1a3d48;box-shadow:0 28px 56px rgba(13,43,51,.32);
+  max-width:280px;margin:0 auto;
 }
-
-.step-item:last-child { border-bottom: none; }
-
-.step-num {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: white; border: 2px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Sora', sans-serif;
-  font-size: 16px; font-weight: 800; color: var(--primary);
-  flex-shrink: 0; transition: all 0.3s;
+.notch{width:70px;height:5px;background:rgba(255,255,255,.1);border-radius:10px;margin:0 auto 16px}
+.ph-label{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.ph-item{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:11px;margin-bottom:8px;
+  display:flex;align-items:center;gap:10px;
 }
-
-.step-item:hover .step-num { background: var(--primary); color: white; border-color: var(--primary); }
-
-.step-text .s-title {
-  font-family: 'Sora', sans-serif;
-  font-size: 16px; font-weight: 700; color: var(--deep-teal);
-  margin-bottom: 6px;
+.ph-ico{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;
+  background:rgba(1,113,211,.25);display:flex;align-items:center;
+  justify-content:center;font-size:15px;color:var(--accent);
 }
-
-.step-text .s-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
-
-.how-visual {
-  position: relative;
+.ph-top{font-size:12px;font-weight:600;color:#fff}
+.ph-bot{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.ph-amt{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#00f5c8;margin-left:auto;white-space:nowrap}
+.ph-total{
+  background:linear-gradient(135deg,rgba(1,113,211,.25),rgba(0,210,255,.15));
+  border-radius:10px;padding:14px;margin-top:10px;text-align:center;
 }
-
-.phone-mockup {
-  background: var(--deep-teal);
-  border-radius: 28px;
-  padding: 24px 20px;
-  border: 8px solid #1a3d48;
-  box-shadow: 0 32px 64px rgba(13,43,51,0.35);
-  max-width: 300px; margin: 0 auto;
-}
-
-.phone-notch {
-  width: 80px; height: 6px; background: rgba(255,255,255,0.1);
-  border-radius: 10px; margin: 0 auto 20px;
-}
-
-.phone-screen-item {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px; padding: 14px;
-  margin-bottom: 10px;
-  display: flex; align-items: center; gap: 12px;
-}
-
-.ps-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: rgba(1,113,211,0.25);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; color: var(--accent);
-  flex-shrink: 0;
-}
-
-.ps-info .ps-top { font-size: 13px; font-weight: 600; color: white; }
-.ps-info .ps-bot { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-
-.ps-amt { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; color: #00f5c8; margin-left: auto; }
+.ph-total-lbl{font-size:10px;color:rgba(255,255,255,.45);margin-bottom:3px}
+.ph-total-val{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:#fff}
+.ph-total-trend{font-size:10px;color:#00f5c8;margin-top:2px}
 
 /* ── SOLUTIONS ── */
-.solutions-section { background: white; }
-
-.solutions-tabs {
-  display: flex; gap: 10px; margin: 36px 0 28px; flex-wrap: wrap;
+.sol-tabs{display:flex;gap:8px;margin:28px 0 22px;flex-wrap:wrap}
+.tab{
+  padding:8px 18px;border-radius:8px;font-size:13px;font-weight:500;
+  border:1.5px solid var(--border);cursor:pointer;color:var(--muted);background:#fff;transition:all .2s;
 }
-
-.tab-btn {
-  padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
-  border: 1.5px solid var(--border); cursor: pointer;
-  color: var(--text-muted); background: white;
-  transition: all 0.2s;
+.tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.sol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sol-card{
+  border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:18px 14px;transition:all .2s;text-decoration:none;display:block;background:#fff;
 }
-
-.tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-.solutions-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.sol-card {
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: 20px 18px; transition: all 0.2s; text-decoration: none;
-  display: block; background: white;
-}
-
-.sol-card:hover { border-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-2px); }
-
-.sol-icon { font-size: 28px; margin-bottom: 12px; display: block; }
-.sol-name { font-size: 14px; font-weight: 600; color: var(--deep-teal); margin-bottom: 5px; }
-.sol-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.sol-card:hover{border-color:var(--primary);box-shadow:var(--sh);transform:translateY(-2px)}
+.sol-ico{font-size:26px;margin-bottom:10px;display:block}
+.sol-name{font-size:13px;font-weight:600;color:var(--teal);margin-bottom:4px}
+.sol-desc{font-size:11px;color:var(--muted);line-height:1.4}
 
 /* ── PRICING ── */
-.pricing-section { background: var(--bg-light); }
-
-.pricing-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px; margin-top: 56px;
+.pricing-section{background:var(--bg)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.price-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--r);padding:32px 26px;position:relative;transition:all .3s;
 }
-
-.price-card {
-  background: white; border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 36px 30px;
-  position: relative; transition: all 0.3s;
+.price-card.pop{border:2px solid var(--primary);box-shadow:var(--sh-lg);transform:translateY(-6px)}
+.pop-badge{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--primary);color:#fff;
+  font-size:11px;font-weight:700;padding:4px 16px;border-radius:50px;white-space:nowrap;
 }
-
-.price-card.popular {
-  border: 2px solid var(--primary);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-8px);
-}
-
-.popular-badge {
-  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-  background: var(--primary); color: white;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
-  padding: 5px 18px; border-radius: 50px;
-  white-space: nowrap;
-}
-
-.plan-name {
-  font-family: 'Sora', sans-serif;
-  font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
-  text-transform: uppercase; color: var(--primary);
-  margin-bottom: 8px;
-}
-
-.plan-price {
-  font-family: 'Sora', sans-serif;
-  font-size: 42px; font-weight: 800; color: var(--deep-teal);
-  line-height: 1;
-}
-
-.plan-price sup { font-size: 18px; font-weight: 600; vertical-align: top; margin-top: 10px; display: inline-block; }
-.plan-price span { font-size: 15px; font-weight: 400; color: var(--text-muted); margin-left: 3px; }
-
-.plan-desc { font-size: 14px; color: var(--text-muted); margin: 12px 0 24px; line-height: 1.5; }
-
-.plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-
-.plan-features li {
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 14px; color: var(--text-main);
-}
-
-.plan-features li i { color: var(--primary); font-size: 16px; margin-top: 1px; flex-shrink: 0; }
-.plan-features li.no i { color: var(--text-light); }
-.plan-features li.no span { color: var(--text-light); }
-
-.plan-btn {
-  display: block; text-align: center;
-  padding: 13px; border-radius: 10px;
-  font-size: 14px; font-weight: 600;
-  text-decoration: none; transition: all 0.2s;
-}
-
-.plan-btn-outline { border: 1.5px solid var(--border); color: var(--primary); }
-.plan-btn-outline:hover { border-color: var(--primary); background: var(--bg-light); }
-.plan-btn-solid { background: var(--primary); color: white; }
-.plan-btn-solid:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.plan-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--primary);margin-bottom:7px}
+.plan-price{font-family:'Sora',sans-serif;font-size:38px;font-weight:800;color:var(--teal);line-height:1}
+.plan-price sup{font-size:16px;font-weight:600;vertical-align:top;margin-top:8px;display:inline-block}
+.plan-price small{font-size:14px;font-weight:400;color:var(--muted);margin-left:2px}
+.plan-desc{font-size:13px;color:var(--muted);margin:10px 0 20px;line-height:1.5}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.plan-feats li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text)}
+.plan-feats li i{color:var(--primary);font-size:15px;margin-top:1px;flex-shrink:0}
+.plan-feats li.no i{color:var(--light)}
+.plan-feats li.no span{color:var(--light)}
+.plan-btn{display:block;text-align:center;padding:12px;border-radius:9px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-outline{border:1.5px solid var(--border);color:var(--primary)}
+.btn-outline:hover{border-color:var(--primary);background:var(--bg)}
+.btn-solid{background:var(--primary);color:#fff}
+.btn-solid:hover{background:var(--primary-dark);transform:translateY(-1px)}
 
 /* ── TESTIMONIALS ── */
-.testi-section { background: white; }
-
-.testi-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px; margin-top: 56px;
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.testi-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px}
+.stars{color:#f5a623;font-size:13px;margin-bottom:12px}
+.testi-text{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:18px;font-style:italic}
+.t-author{display:flex;align-items:center;gap:10px}
+.avatar{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#fff;
 }
-
-.testi-card {
-  background: var(--bg-light);
-  border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 24px;
-}
-
-.testi-stars { color: #f5a623; font-size: 14px; margin-bottom: 14px; }
-
-.testi-text { font-size: 15px; line-height: 1.7; color: var(--text-main); margin-bottom: 20px; font-style: italic; }
-
-.testi-author { display: flex; align-items: center; gap: 12px; }
-
-.author-avatar {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Sora', sans-serif;
-  font-size: 14px; font-weight: 700; color: white;
-}
-
-.author-name { font-size: 14px; font-weight: 600; color: var(--deep-teal); }
-.author-role { font-size: 12px; color: var(--text-muted); }
+.a-name{font-size:13px;font-weight:600;color:var(--teal)}
+.a-role{font-size:11px;color:var(--muted)}
 
 /* ── CTA ── */
-.cta-section {
-  background: var(--deep-teal);
-  position: relative; overflow: hidden;
-  text-align: center;
-}
-
-.cta-bg {
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 30% 50%, rgba(0,210,255,0.08) 0%, transparent 50%),
-    radial-gradient(circle at 70% 50%, rgba(1,113,211,0.15) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.cta-section .section-inner { position: relative; z-index: 2; }
-
-.cta-title {
-  font-family: 'Sora', sans-serif;
-  font-size: clamp(30px, 4vw, 52px);
-  font-weight: 800; color: white; line-height: 1.2;
-  margin-bottom: 16px;
-}
-
-.cta-title .gradient-text {
-  background: linear-gradient(90deg, #00d2ff, #00f5c8);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-
-.cta-sub { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
-
-.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
-
-.cta-trust {
-  display: flex; align-items: center; justify-content: center;
-  gap: 28px; flex-wrap: wrap;
-}
-
-.cta-trust-item {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: rgba(255,255,255,0.5);
-}
-
-.cta-trust-item i { color: #00f5c8; }
+.cta-sec{background:var(--teal);position:relative;overflow:hidden;text-align:center}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(0,210,255,.08) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(1,113,211,.14) 0%,transparent 50%);pointer-events:none}
+.cta-inner{position:relative;z-index:2}
+.cta-title{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,48px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px}
+.cta-title .grad{background:linear-gradient(90deg,#00d2ff,#00f5c8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:30px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.cta-trust{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}
+.ct-item{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.5)}
+.ct-item i{color:#00f5c8}
 
 /* ── FOOTER ── */
-footer {
-  background: #071a20;
-  padding: 64px 5% 32px;
-  color: rgba(255,255,255,0.7);
+footer{background:#071a20;padding:56px 4% 28px}
+.foot-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.foot-brand .fw{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.foot-brand .logo-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#0171d3,#00d2ff);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:800;font-family:'Sora',sans-serif}
+.foot-brand .fn{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:#fff}
+.foot-brand p{font-size:13px;line-height:1.65;color:rgba(255,255,255,.4);margin-bottom:18px}
+.soc{display:flex;gap:9px}
+.soc-a{width:32px;height:32px;border-radius:7px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.45);font-size:16px;text-decoration:none;transition:all .2s}
+.soc-a:hover{background:var(--primary);color:#fff}
+.foot-col h4{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col ul li a{text-decoration:none;font-size:13px;color:rgba(255,255,255,.4);transition:color .2s}
+.foot-col ul li a:hover{color:var(--accent)}
+.foot-bottom{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.08);padding-top:24px;font-size:12px;color:rgba(255,255,255,.3);flex-wrap:wrap;gap:10px}
+.foot-bottom a{color:rgba(255,255,255,.3);text-decoration:none}
+.foot-bottom a:hover{color:var(--accent)}
+
+/* WhatsApp float */
+.wa{
+  position:fixed;bottom:20px;right:16px;z-index:999;
+  background:#25d366;color:#fff;padding:10px 18px;border-radius:50px;
+  text-decoration:none;display:flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:600;
+  box-shadow:0 6px 20px rgba(37,211,102,.35);transition:all .3s;
+}
+.wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.45)}
+
+/* ══════════════════════════
+   RESPONSIVE
+══════════════════════════ */
+
+/* Tablet (≤ 960px) */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .hero-title{font-size:clamp(28px,6vw,44px)}
+  .hero-sub{max-width:100%}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .how-grid{grid-template-columns:1fr}
+  .phone{display:none}
+  .how-grid .sec-label,.how-grid .sec-title,.how-grid .sec-sub{display:block}
+  .sol-grid{grid-template-columns:repeat(3,1fr)}
+  .price-grid{grid-template-columns:1fr}
+  .price-card.pop{transform:none}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .hamburger{display:block}
 }
 
-.footer-grid {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px; margin-bottom: 48px;
+/* Mobile (≤ 600px) */
+@media(max-width:600px){
+  nav{padding:0 4%;height:56px}
+  section{padding:52px 4%}
+
+  /* hero */
+  .hero{padding:76px 4% 48px;min-height:auto}
+  .hero-title{font-size:28px;line-height:1.15}
+  .hero-sub{font-size:15px;margin-bottom:24px}
+  .hero-btns{flex-direction:column;gap:10px;margin-bottom:32px}
+  .btn-hp,.btn-hg{width:100%;justify-content:center;padding:14px 20px}
+  .hero-stats{gap:18px}
+  .stat-num{font-size:22px}
+  .hero-badge{font-size:11px;padding:4px 11px}
+
+  /* trust */
+  .trust-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  .trust-logos{gap:18px}
+  .tlogo{font-size:12px}
+
+  /* features */
+  .feat-grid{grid-template-columns:1fr;gap:14px;margin-top:32px}
+  .feat-card{padding:22px 18px}
+
+  /* how it works – full single col */
+  .how-grid{gap:32px;margin-top:32px}
+  .step{gap:14px;padding:16px 0}
+  .step-num{width:38px;height:38px;font-size:14px}
+
+  /* solutions */
+  .sol-tabs{gap:6px}
+  .tab{padding:7px 13px;font-size:12px}
+  .sol-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .sol-card{padding:14px 12px}
+  .sol-ico{font-size:22px;margin-bottom:7px}
+
+  /* pricing */
+  .price-grid{grid-template-columns:1fr;gap:16px;margin-top:32px}
+  .price-card{padding:26px 20px}
+  .plan-price{font-size:34px}
+
+  /* testimonials */
+  .testi-grid{grid-template-columns:1fr;gap:14px;margin-top:32px}
+  .testi-card{padding:20px 16px}
+  .testi-text{font-size:13px}
+
+  /* cta */
+  .cta-btns{flex-direction:column;align-items:center;gap:10px}
+  .btn-hp,.btn-hg{width:100%;max-width:320px;justify-content:center}
+  .cta-trust{gap:12px}
+  .ct-item{font-size:11px}
+  .cta-sub{font-size:14px}
+
+  /* footer */
+  .foot-grid{grid-template-columns:1fr;gap:24px;margin-bottom:28px}
+  .foot-bottom{flex-direction:column;text-align:center;gap:6px}
+
+  /* wa float – icon only on small */
+  .wa .wa-txt{display:none}
+  .wa{padding:12px;border-radius:50%;width:46px;height:46px;justify-content:center}
+  .wa i{font-size:22px}
+
+  /* section titles */
+  .sec-title{font-size:22px}
+  .sec-sub{font-size:14px}
+  .section-label{font-size:10px}
 }
 
-.footer-brand .logo-wrap {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
-}
-
-.footer-brand .logo-icon {
-  width: 34px; height: 34px; border-radius: 9px;
-  background: linear-gradient(135deg, #0171d3, #00d2ff);
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 16px; font-weight: 800;
-  font-family: 'Sora', sans-serif;
-}
-
-.footer-brand span {
-  font-family: 'Sora', sans-serif;
-  font-size: 18px; font-weight: 700; color: white;
-}
-
-.footer-brand p {
-  font-size: 14px; line-height: 1.65;
-  color: rgba(255,255,255,0.45); margin-bottom: 20px;
-}
-
-.footer-social { display: flex; gap: 10px; }
-
-.soc-btn {
-  width: 34px; height: 34px; border-radius: 8px;
-  background: rgba(255,255,255,0.06);
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.5); font-size: 17px;
-  text-decoration: none; transition: all 0.2s;
-}
-
-.soc-btn:hover { background: var(--primary); color: white; }
-
-.footer-col h4 {
-  font-family: 'Sora', sans-serif;
-  font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
-  text-transform: uppercase; color: white; margin-bottom: 16px;
-}
-
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-.footer-col ul li a {
-  text-decoration: none; font-size: 14px;
-  color: rgba(255,255,255,0.45); transition: color 0.2s;
-}
-
-.footer-col ul li a:hover { color: var(--accent); }
-
-.footer-bottom {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;
-  font-size: 13px; color: rgba(255,255,255,0.3);
-  flex-wrap: wrap; gap: 12px;
-}
-
-.footer-bottom a { color: rgba(255,255,255,0.3); text-decoration: none; }
-.footer-bottom a:hover { color: var(--accent); }
-
-/* whatsapp float */
-.wa-float {
-  position: fixed; bottom: 24px; right: 24px; z-index: 999;
-  background: #25d366; color: white;
-  padding: 12px 20px; border-radius: 50px;
-  text-decoration: none; display: flex; align-items: center; gap: 8px;
-  font-size: 14px; font-weight: 600;
-  box-shadow: 0 8px 24px rgba(37,211,102,0.35);
-  transition: all 0.3s;
-}
-
-.wa-float:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,0.45); }
-
-/* mobile nav */
-.mobile-menu {
-  display: none; flex-direction: column; gap: 4px;
-  background: white; border-top: 1px solid var(--border);
-  padding: 16px 5%; position: fixed; top: 68px; left: 0; right: 0;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08); z-index: 99;
-}
-
-.mobile-menu.open { display: flex; }
-.mobile-menu a { text-decoration: none; font-size: 15px; color: var(--text-muted); padding: 10px 4px; border-bottom: 1px solid var(--bg-light); }
-.mobile-menu a:last-child { border-bottom: none; }
-
-/* animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-up { animation: fadeUp 0.7s ease forwards; }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-
-/* responsive */
-@media (max-width: 900px) {
-  .hero-content { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
-  .features-grid { grid-template-columns: 1fr 1fr; }
-  .how-grid { grid-template-columns: 1fr; }
-  .solutions-grid { grid-template-columns: 1fr 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .price-card.popular { transform: none; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .nav-links { display: none; }
-  .hamburger { display: block; }
-}
-
-@media (max-width: 600px) {
-  .features-grid { grid-template-columns: 1fr; }
-  .solutions-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .hero-stats { flex-wrap: wrap; gap: 20px; }
+/* Very small (≤ 380px) */
+@media(max-width:380px){
+  .hero-title{font-size:24px}
+  .sol-grid{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:12px}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav id="mainNav">
+<nav id="nav">
   <a href="#" class="nav-logo">
     <div class="logo-icon">B</div>
     <span>BizaroHQ</span>
@@ -835,254 +501,123 @@ footer {
     <a href="login.html" class="btn-ghost">Log In</a>
     <a href="register.html" class="btn-primary">Start Free</a>
   </div>
-  <div class="hamburger" onclick="toggleMenu()"><i class='bx bx-menu'></i></div>
+  <div class="hamburger" onclick="toggleMenu()" aria-label="Menu"><i class='bx bx-menu' id="ham-ico"></i></div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#features">Features</a>
-  <a href="#solutions">Solutions</a>
-  <a href="#how">How it Works</a>
-  <a href="#pricing">Pricing</a>
-  <a href="login.html">Log In</a>
-  <a href="register.html" style="color:var(--primary); font-weight:600;">Start Free →</a>
+  <a href="#features" onclick="closeMenu()">Features</a>
+  <a href="#solutions" onclick="closeMenu()">Solutions</a>
+  <a href="#how" onclick="closeMenu()">How it Works</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="register.html">Get Started Free →</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-pattern"></div>
+  <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-content">
+  <div class="hero-inner">
     <div>
-      <div class="hero-badge animate-up">
-        <span></span> Trusted by 1,200+ Garages &amp; Service Centers
+      <div class="hero-badge"><span class="dot"></span> Trusted by 1,200+ Garages</div>
+      <h1 class="hero-title">From Paper Records to<br><span class="grad">Digital Assets</span></h1>
+      <p class="hero-sub">BizaroHQ is a complete digital portal for garages and service centers. Job cards, invoices, inventory, and customer history — all in one dashboard.</p>
+      <div class="hero-btns">
+        <a href="register.html" class="btn-hp">Get Started Free <i class='bx bx-right-arrow-alt'></i></a>
+        <a href="#how" class="btn-hg"><i class='bx bx-play-circle'></i> See How It Works</a>
       </div>
-      <h1 class="hero-title animate-up delay-1">
-        From Paper Records to<br>
-        <span class="gradient-text">Digital Assets</span>
-      </h1>
-      <p class="hero-subtitle animate-up delay-2">
-        BizaroHQ is a complete digital records portal for garages, workshops, and service centers. Manage job cards, invoices, inventory, and customer history — all from one dashboard.
-      </p>
-      <div class="hero-actions animate-up delay-3">
-        <a href="register.html" class="btn-hero-primary">
-          Get Started Free <i class='bx bx-right-arrow-alt'></i>
-        </a>
-        <a href="#how" class="btn-hero-ghost">
-          <i class='bx bx-play-circle'></i> See How It Works
-        </a>
-      </div>
-      <div class="hero-stats animate-up delay-3">
-        <div class="stat-item">
-          <div class="stat-num">1,200+</div>
-          <div class="stat-label">Active Garages</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">48K+</div>
-          <div class="stat-label">Job Cards Created</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">99.9%</div>
-          <div class="stat-label">Uptime SLA</div>
-        </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">1,200+</div><div class="stat-lbl">Active Garages</div></div>
+        <div><div class="stat-num">48K+</div><div class="stat-lbl">Job Cards Created</div></div>
+        <div><div class="stat-num">99.9%</div><div class="stat-lbl">Uptime SLA</div></div>
       </div>
     </div>
-
-    <!-- dashboard mockup -->
     <div class="hero-visual">
-      <div class="dashboard-card">
-        <div class="dash-header">
+      <div class="dash-card">
+        <div class="dash-hd">
           <div class="dash-title">Workshop Overview</div>
-          <div class="dash-badge">Live</div>
+          <div class="dash-live">Live</div>
         </div>
         <div class="dash-metrics">
-          <div class="metric-box">
-            <div class="m-val">24</div>
-            <div class="m-lbl">Jobs Today</div>
-          </div>
-          <div class="metric-box">
-            <div class="m-val">₹1.2L</div>
-            <div class="m-lbl">Revenue</div>
-          </div>
-          <div class="metric-box">
-            <div class="m-val">8</div>
-            <div class="m-lbl">Pending</div>
-          </div>
+          <div class="mbox"><div class="mv">24</div><div class="ml">Jobs Today</div></div>
+          <div class="mbox"><div class="mv">₹1.2L</div><div class="ml">Revenue</div></div>
+          <div class="mbox"><div class="mv">8</div><div class="ml">Pending</div></div>
         </div>
-        <div class="dash-joblist">
-          <div class="job-row">
-            <div class="job-dot dot-green"></div>
-            <div class="job-info">
-              <div class="j-name">MH02 AB 1234 — Honda City</div>
-              <div class="j-sub">Oil change + Full service</div>
-            </div>
-            <div class="job-status status-done">Done</div>
-          </div>
-          <div class="job-row">
-            <div class="job-dot dot-amber"></div>
-            <div class="job-info">
-              <div class="j-name">MH04 CD 5678 — Swift Dzire</div>
-              <div class="j-sub">Engine diagnostics</div>
-            </div>
-            <div class="job-status status-prog">In Progress</div>
-          </div>
-          <div class="job-row">
-            <div class="job-dot dot-blue"></div>
-            <div class="job-info">
-              <div class="j-name">MH01 EF 9012 — Activa 6G</div>
-              <div class="j-sub">Brake pad replacement</div>
-            </div>
-            <div class="job-status status-wait">Waiting</div>
-          </div>
+        <div class="jobs">
+          <div class="job-row"><div class="jdot dg"></div><div class="jinfo"><div class="jn">MH02 AB 1234 — Honda City</div><div class="js2">Oil change + Full service</div></div><div class="jst st-done">Done</div></div>
+          <div class="job-row"><div class="jdot da"></div><div class="jinfo"><div class="jn">MH04 CD 5678 — Swift Dzire</div><div class="js2">Engine diagnostics</div></div><div class="jst st-prog">In Progress</div></div>
+          <div class="job-row"><div class="jdot db"></div><div class="jinfo"><div class="jn">MH01 EF 9012 — Activa 6G</div><div class="js2">Brake pad replacement</div></div><div class="jst st-wait">Waiting</div></div>
         </div>
       </div>
-      <!-- floating cards -->
-      <div class="float-card float-card-tl">
-        <div class="float-icon fc-blue"><i class='bx bx-check-shield' style="color:var(--primary);font-size:20px;"></i></div>
-        <div class="float-text">
-          <div class="ft-main">Invoice Sent</div>
-          <div class="ft-sub">Auto-generated PDF</div>
-        </div>
+      <div class="fc fc-tl">
+        <div class="fc-ico ico-b"><i class='bx bx-check-shield' style="color:var(--primary)"></i></div>
+        <div><div class="fc-main">Invoice Sent</div><div class="fc-sub">Auto-generated PDF</div></div>
       </div>
-      <div class="float-card float-card-br">
-        <div class="float-icon fc-green"><i class='bx bx-trending-up' style="color:#3B6D11;font-size:20px;"></i></div>
-        <div class="float-text">
-          <div class="ft-main">↑ 34% Revenue</div>
-          <div class="ft-sub">vs. last month</div>
-        </div>
+      <div class="fc fc-br">
+        <div class="fc-ico ico-g"><i class='bx bx-trending-up' style="color:#3B6D11"></i></div>
+        <div><div class="fc-main">↑ 34% Revenue</div><div class="fc-sub">vs. last month</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
+<!-- TRUST -->
 <div class="trust-bar">
   <div class="trust-inner">
-    <div class="trust-label">Trusted by teams across India</div>
+    <div class="trust-lbl">Trusted by</div>
     <div class="trust-logos">
-      <div class="trust-logo"><i class='bx bx-car'></i> AutoPro Garage</div>
-      <div class="trust-logo"><i class='bx bx-wrench'></i> SpeedFix Motors</div>
-      <div class="trust-logo"><i class='bx bx-cog'></i> MechMaster</div>
-      <div class="trust-logo"><i class='bx bx-car'></i> City Auto Care</div>
-      <div class="trust-logo"><i class='bx bx-wrench'></i> TurboFix Hub</div>
+      <div class="tlogo"><i class='bx bx-car'></i> AutoPro Garage</div>
+      <div class="tlogo"><i class='bx bx-wrench'></i> SpeedFix Motors</div>
+      <div class="tlogo"><i class='bx bx-cog'></i> MechMaster</div>
+      <div class="tlogo"><i class='bx bx-car'></i> City Auto Care</div>
+      <div class="tlogo"><i class='bx bx-wrench'></i> TurboFix Hub</div>
     </div>
   </div>
 </div>
 
 <!-- FEATURES -->
-<section class="features-section" id="features">
-  <div class="section-inner">
-    <div class="section-label">Why BizaroHQ</div>
-    <h2 class="section-title">Everything your workshop needs,<br>in one place</h2>
-    <p class="section-sub">Stop juggling paper registers, WhatsApp messages, and Excel sheets. BizaroHQ brings your entire operation online — instantly.</p>
-
-    <div class="features-grid">
-      <div class="feat-card">
-        <div class="feat-icon"><i class='bx bx-file'></i></div>
-        <div class="feat-title">Digital Job Cards</div>
-        <p class="feat-desc">Create, assign, and track job cards in seconds. Attach vehicle photos, technician notes, and part lists — all paperless.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class='bx bx-receipt'></i></div>
-        <div class="feat-title">Auto Invoicing</div>
-        <p class="feat-desc">Generate branded GST invoices automatically when a job is completed. Share via WhatsApp or email with one click.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class='bx bx-package'></i></div>
-        <div class="feat-title">Inventory & Parts</div>
-        <p class="feat-desc">Track spare parts stock in real-time. Get low-stock alerts and auto-deduct parts when they are added to job cards.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class='bx bx-user-circle'></i></div>
-        <div class="feat-title">Customer Records</div>
-        <p class="feat-desc">Complete vehicle and service history for every customer. Send service reminders automatically to drive repeat business.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class='bx bx-bar-chart-alt-2'></i></div>
-        <div class="feat-title">Analytics & Reports</div>
-        <p class="feat-desc">Daily, monthly, and custom reports on revenue, jobs, technician performance, and parts usage — always up to date.</p>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class='bx bx-group'></i></div>
-        <div class="feat-title">Multi-Staff Access</div>
-        <p class="feat-desc">Role-based access for owners and staff. Owners see everything; staff see only their jobs — no data leaks, full control.</p>
-      </div>
+<section id="features">
+  <div class="wrap">
+    <div class="sec-label">Why BizaroHQ</div>
+    <h2 class="sec-title">Everything your workshop needs,<br>in one place</h2>
+    <p class="sec-sub">Stop juggling paper registers, WhatsApp messages and Excel sheets. BizaroHQ brings your entire operation online — instantly.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-ico"><i class='bx bx-file'></i></div><div class="feat-title">Digital Job Cards</div><p class="feat-desc">Create, assign and track job cards in seconds. Attach photos, technician notes and parts lists — fully paperless.</p></div>
+      <div class="feat-card"><div class="feat-ico"><i class='bx bx-receipt'></i></div><div class="feat-title">Auto Invoicing</div><p class="feat-desc">Generate branded GST invoices automatically when a job is done. Share via WhatsApp or email in one tap.</p></div>
+      <div class="feat-card"><div class="feat-ico"><i class='bx bx-package'></i></div><div class="feat-title">Inventory & Parts</div><p class="feat-desc">Track spare parts stock in real-time. Get low-stock alerts and auto-deduct parts when added to job cards.</p></div>
+      <div class="feat-card"><div class="feat-ico"><i class='bx bx-user-circle'></i></div><div class="feat-title">Customer Records</div><p class="feat-desc">Complete vehicle and service history for every customer. Send service reminders to drive repeat business.</p></div>
+      <div class="feat-card"><div class="feat-ico"><i class='bx bx-bar-chart-alt-2'></i></div><div class="feat-title">Analytics & Reports</div><p class="feat-desc">Daily, monthly and custom reports on revenue, jobs, technician performance and parts usage.</p></div>
+      <div class="feat-card"><div class="feat-ico"><i class='bx bx-group'></i></div><div class="feat-title">Multi-Staff Access</div><p class="feat-desc">Role-based access for owners and staff. Owners see everything; staff see only their assigned jobs.</p></div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
 <section class="how-section" id="how">
-  <div class="section-inner">
+  <div class="wrap">
     <div class="how-grid">
       <div>
-        <div class="section-label">How It Works</div>
-        <h2 class="section-title">Set up in minutes,<br>run for years</h2>
-        <p class="section-sub" style="margin-bottom:36px;">No technical knowledge required. If you can use WhatsApp, you can use BizaroHQ.</p>
-
-        <div class="steps-list">
-          <div class="step-item">
-            <div class="step-num">01</div>
-            <div class="step-text">
-              <div class="s-title">Create your garage account</div>
-              <div class="s-desc">Sign up in 2 minutes. Add your garage name, address, and logo. Your portal is live immediately.</div>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-num">02</div>
-            <div class="step-text">
-              <div class="s-title">Add your staff & inventory</div>
-              <div class="s-desc">Invite technicians with their own login. Import or manually add your spare parts inventory.</div>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-num">03</div>
-            <div class="step-text">
-              <div class="s-title">Start creating digital job cards</div>
-              <div class="s-desc">Every vehicle that enters your garage gets a digital record — photos, parts, labor, and status updates.</div>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-num">04</div>
-            <div class="step-text">
-              <div class="s-title">Invoice & grow your business</div>
-              <div class="s-desc">Auto-generate invoices, track revenue, and use insights to scale your garage to the next level.</div>
-            </div>
-          </div>
+        <div class="sec-label">How It Works</div>
+        <h2 class="sec-title">Set up in minutes,<br>run for years</h2>
+        <p class="sec-sub" style="margin-bottom:0">No technical knowledge required. If you can use WhatsApp, you can use BizaroHQ.</p>
+        <div class="steps">
+          <div class="step"><div class="step-num">01</div><div><div class="s-title">Create your garage account</div><div class="s-desc">Sign up in 2 minutes. Add your garage name, address and logo. Your portal goes live immediately.</div></div></div>
+          <div class="step"><div class="step-num">02</div><div><div class="s-title">Add staff & inventory</div><div class="s-desc">Invite technicians with their own login. Import or manually add your spare parts inventory.</div></div></div>
+          <div class="step"><div class="step-num">03</div><div><div class="s-title">Create digital job cards</div><div class="s-desc">Every vehicle gets a digital record — photos, parts, labor and live status updates.</div></div></div>
+          <div class="step"><div class="step-num">04</div><div><div class="s-title">Invoice & grow</div><div class="s-desc">Auto-generate invoices, track revenue and use insights to scale your garage further.</div></div></div>
         </div>
       </div>
-
       <div class="how-visual">
-        <div class="phone-mockup">
-          <div class="phone-notch"></div>
-          <div style="font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:14px; text-transform:uppercase; letter-spacing:1px;">Today's Jobs</div>
-          <div class="phone-screen-item">
-            <div class="ps-icon"><i class='bx bx-car'></i></div>
-            <div class="ps-info">
-              <div class="ps-top">Honda City</div>
-              <div class="ps-bot">MH02 AB 1234 · Full service</div>
-            </div>
-            <div class="ps-amt">₹4,200</div>
-          </div>
-          <div class="phone-screen-item">
-            <div class="ps-icon"><i class='bx bx-cycling'></i></div>
-            <div class="ps-info">
-              <div class="ps-top">Activa 6G</div>
-              <div class="ps-bot">MH01 EF 9012 · Brakes</div>
-            </div>
-            <div class="ps-amt">₹850</div>
-          </div>
-          <div class="phone-screen-item">
-            <div class="ps-icon"><i class='bx bx-car'></i></div>
-            <div class="ps-info">
-              <div class="ps-top">Swift Dzire</div>
-              <div class="ps-bot">MH04 CD 5678 · Engine check</div>
-            </div>
-            <div class="ps-amt">₹2,600</div>
-          </div>
-          <div style="background:linear-gradient(135deg,rgba(1,113,211,0.25),rgba(0,210,255,0.15)); border-radius:12px; padding:16px; margin-top:14px; text-align:center;">
-            <div style="font-size:11px; color:rgba(255,255,255,0.45); margin-bottom:4px;">Today's Revenue</div>
-            <div style="font-family:'Sora',sans-serif; font-size:26px; font-weight:800; color:white;">₹7,650</div>
-            <div style="font-size:11px; color:#00f5c8; margin-top:3px;">↑ 22% vs yesterday</div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="ph-label">Today's Jobs</div>
+          <div class="ph-item"><div class="ph-ico"><i class='bx bx-car'></i></div><div><div class="ph-top">Honda City</div><div class="ph-bot">MH02 AB 1234 · Full service</div></div><div class="ph-amt">₹4,200</div></div>
+          <div class="ph-item"><div class="ph-ico"><i class='bx bx-cycling'></i></div><div><div class="ph-top">Activa 6G</div><div class="ph-bot">MH01 EF 9012 · Brakes</div></div><div class="ph-amt">₹850</div></div>
+          <div class="ph-item"><div class="ph-ico"><i class='bx bx-car'></i></div><div><div class="ph-top">Swift Dzire</div><div class="ph-bot">MH04 CD 5678 · Engine</div></div><div class="ph-amt">₹2,600</div></div>
+          <div class="ph-total">
+            <div class="ph-total-lbl">Today's Revenue</div>
+            <div class="ph-total-val">₹7,650</div>
+            <div class="ph-total-trend">↑ 22% vs yesterday</div>
           </div>
         </div>
       </div>
@@ -1091,51 +626,47 @@ footer {
 </section>
 
 <!-- SOLUTIONS -->
-<section class="solutions-section" id="solutions">
-  <div class="section-inner">
-    <div class="section-label">Our Solutions</div>
-    <h2 class="section-title">Built for every type<br>of service business</h2>
-
-    <div class="solutions-tabs">
-      <button class="tab-btn active" onclick="filterSol('all', this)">All</button>
-      <button class="tab-btn" onclick="filterSol('garage', this)">Garage & Auto</button>
-      <button class="tab-btn" onclick="filterSol('appliance', this)">Appliance Repair</button>
-      <button class="tab-btn" onclick="filterSol('services', this)">Home Services</button>
+<section id="solutions">
+  <div class="wrap">
+    <div class="sec-label">Our Solutions</div>
+    <h2 class="sec-title">Built for every type<br>of service business</h2>
+    <div class="sol-tabs">
+      <button class="tab active" onclick="filterSol('all',this)">All</button>
+      <button class="tab" onclick="filterSol('garage',this)">Garage & Auto</button>
+      <button class="tab" onclick="filterSol('appliance',this)">Appliance Repair</button>
+      <button class="tab" onclick="filterSol('services',this)">Home Services</button>
     </div>
-
-    <div class="solutions-grid" id="solGrid">
-      <a href="#" class="sol-card" data-cat="garage"><span class="sol-icon">🚗</span><div class="sol-name">Car Repair CRM</div><div class="sol-desc">Complete solution for car workshops</div></a>
-      <a href="#" class="sol-card" data-cat="garage"><span class="sol-icon">🏍️</span><div class="sol-name">Bike Repair CRM</div><div class="sol-desc">Streamline your two-wheeler service</div></a>
-      <a href="#" class="sol-card" data-cat="garage"><span class="sol-icon">🚛</span><div class="sol-name">Truck & Fleet CRM</div><div class="sol-desc">Manage heavy vehicle servicing</div></a>
-      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-icon">❄️</span><div class="sol-name">AC Repair CRM</div><div class="sol-desc">Air conditioner service management</div></a>
-      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-icon">💧</span><div class="sol-name">RO & Water Purifier</div><div class="sol-desc">Water purifier service tracking</div></a>
-      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-icon">📱</span><div class="sol-name">Mobile Phone Repair</div><div class="sol-desc">Repair shop management for phones</div></a>
-      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-icon">💻</span><div class="sol-name">Laptop Repair CRM</div><div class="sol-desc">IT repair service solution</div></a>
-      <a href="#" class="sol-card" data-cat="services"><span class="sol-icon">🔧</span><div class="sol-name">Plumbing CRM</div><div class="sol-desc">Plumbing business management</div></a>
-      <a href="#" class="sol-card" data-cat="services"><span class="sol-icon">⚡</span><div class="sol-name">Electrical Repair</div><div class="sol-desc">Electrical service management</div></a>
-      <a href="#" class="sol-card" data-cat="services"><span class="sol-icon">📷</span><div class="sol-name">CCTV & Security</div><div class="sol-desc">Security system service CRM</div></a>
-      <a href="#" class="sol-card" data-cat="services"><span class="sol-icon">🧺</span><div class="sol-name">Laundry Service</div><div class="sol-desc">Complete laundry business CRM</div></a>
-      <a href="#" class="sol-card" data-cat="services"><span class="sol-icon">☀️</span><div class="sol-name">Solar Service CRM</div><div class="sol-desc">Solar installation & service ERP</div></a>
+    <div class="sol-grid">
+      <a href="#" class="sol-card" data-cat="garage"><span class="sol-ico">🚗</span><div class="sol-name">Car Repair CRM</div><div class="sol-desc">Complete solution for car workshops</div></a>
+      <a href="#" class="sol-card" data-cat="garage"><span class="sol-ico">🏍️</span><div class="sol-name">Bike Repair CRM</div><div class="sol-desc">Streamline two-wheeler service</div></a>
+      <a href="#" class="sol-card" data-cat="garage"><span class="sol-ico">🚛</span><div class="sol-name">Truck & Fleet CRM</div><div class="sol-desc">Manage heavy vehicle servicing</div></a>
+      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-ico">❄️</span><div class="sol-name">AC Repair CRM</div><div class="sol-desc">Air conditioner service management</div></a>
+      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-ico">💧</span><div class="sol-name">RO & Water Purifier</div><div class="sol-desc">Water purifier service tracking</div></a>
+      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-ico">📱</span><div class="sol-name">Mobile Phone Repair</div><div class="sol-desc">Repair shop management</div></a>
+      <a href="#" class="sol-card" data-cat="appliance"><span class="sol-ico">💻</span><div class="sol-name">Laptop Repair CRM</div><div class="sol-desc">IT repair service solution</div></a>
+      <a href="#" class="sol-card" data-cat="services"><span class="sol-ico">🔧</span><div class="sol-name">Plumbing CRM</div><div class="sol-desc">Plumbing business management</div></a>
+      <a href="#" class="sol-card" data-cat="services"><span class="sol-ico">⚡</span><div class="sol-name">Electrical Repair</div><div class="sol-desc">Electrical service management</div></a>
+      <a href="#" class="sol-card" data-cat="services"><span class="sol-ico">📷</span><div class="sol-name">CCTV & Security</div><div class="sol-desc">Security system service CRM</div></a>
+      <a href="#" class="sol-card" data-cat="services"><span class="sol-ico">🧺</span><div class="sol-name">Laundry Service</div><div class="sol-desc">Complete laundry business CRM</div></a>
+      <a href="#" class="sol-card" data-cat="services"><span class="sol-ico">☀️</span><div class="sol-name">Solar Service CRM</div><div class="sol-desc">Solar installation & service ERP</div></a>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
 <section class="pricing-section" id="pricing">
-  <div class="section-inner">
-    <div style="text-align:center; margin-bottom:8px;">
-      <div class="section-label" style="justify-content:center;">Pricing</div>
-      <h2 class="section-title">Simple, transparent pricing</h2>
-      <p class="section-sub" style="margin:0 auto;">No hidden fees. No contracts. Cancel anytime.</p>
+  <div class="wrap">
+    <div style="text-align:center">
+      <div class="sec-label" style="justify-content:center">Pricing</div>
+      <h2 class="sec-title">Simple, transparent pricing</h2>
+      <p class="sec-sub" style="margin:0 auto">No hidden fees. No contracts. Cancel anytime.</p>
     </div>
-
-    <div class="pricing-grid">
-      <!-- Starter -->
+    <div class="price-grid">
       <div class="price-card">
         <div class="plan-name">Starter</div>
-        <div class="plan-price"><sup>₹</sup>999<span>/mo</span></div>
+        <div class="plan-price"><sup>₹</sup>999<small>/mo</small></div>
         <p class="plan-desc">Perfect for solo mechanics and small garages just getting started.</p>
-        <ul class="plan-features">
+        <ul class="plan-feats">
           <li><i class='bx bx-check-circle'></i><span>1 Staff login</span></li>
           <li><i class='bx bx-check-circle'></i><span>100 Job cards/month</span></li>
           <li><i class='bx bx-check-circle'></i><span>Basic invoicing</span></li>
@@ -1143,16 +674,14 @@ footer {
           <li class="no"><i class='bx bx-x-circle'></i><span>Inventory management</span></li>
           <li class="no"><i class='bx bx-x-circle'></i><span>Analytics dashboard</span></li>
         </ul>
-        <a href="register.html" class="plan-btn plan-btn-outline">Get Started</a>
+        <a href="register.html" class="plan-btn btn-outline">Get Started</a>
       </div>
-
-      <!-- Professional -->
-      <div class="price-card popular">
-        <div class="popular-badge">Most Popular</div>
+      <div class="price-card pop">
+        <div class="pop-badge">Most Popular</div>
         <div class="plan-name">Professional</div>
-        <div class="plan-price"><sup>₹</sup>2,499<span>/mo</span></div>
+        <div class="plan-price"><sup>₹</sup>2,499<small>/mo</small></div>
         <p class="plan-desc">For growing garages that need full control over operations.</p>
-        <ul class="plan-features">
+        <ul class="plan-feats">
           <li><i class='bx bx-check-circle'></i><span>10 Staff logins</span></li>
           <li><i class='bx bx-check-circle'></i><span>Unlimited Job cards</span></li>
           <li><i class='bx bx-check-circle'></i><span>GST invoicing + WhatsApp share</span></li>
@@ -1160,15 +689,13 @@ footer {
           <li><i class='bx bx-check-circle'></i><span>Analytics & reports</span></li>
           <li><i class='bx bx-check-circle'></i><span>Service reminders (SMS + Email)</span></li>
         </ul>
-        <a href="register.html" class="plan-btn plan-btn-solid">Start Free Trial</a>
+        <a href="register.html" class="plan-btn btn-solid">Start Free Trial</a>
       </div>
-
-      <!-- Enterprise -->
       <div class="price-card">
         <div class="plan-name">Enterprise</div>
-        <div class="plan-price" style="font-size:32px;">Custom</div>
-        <p class="plan-desc">For multi-location garage chains and franchise networks.</p>
-        <ul class="plan-features">
+        <div class="plan-price" style="font-size:28px">Custom</div>
+        <p class="plan-desc">For multi-location chains and franchise networks.</p>
+        <ul class="plan-feats">
           <li><i class='bx bx-check-circle'></i><span>Unlimited staff & locations</span></li>
           <li><i class='bx bx-check-circle'></i><span>White-label branding</span></li>
           <li><i class='bx bx-check-circle'></i><span>API access & integrations</span></li>
@@ -1176,167 +703,96 @@ footer {
           <li><i class='bx bx-check-circle'></i><span>Priority support (24/7)</span></li>
           <li><i class='bx bx-check-circle'></i><span>Custom reporting</span></li>
         </ul>
-        <a href="https://wa.me/918802929885" class="plan-btn plan-btn-outline">Contact Sales</a>
+        <a href="https://wa.me/918802929885" class="plan-btn btn-outline">Contact Sales</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testi-section" id="testimonials">
-  <div class="section-inner">
-    <div style="text-align:center; margin-bottom:8px;">
-      <div class="section-label" style="justify-content:center;">Reviews</div>
-      <h2 class="section-title">Loved by garage owners<br>across India</h2>
+<section id="testimonials">
+  <div class="wrap">
+    <div style="text-align:center">
+      <div class="sec-label" style="justify-content:center">Reviews</div>
+      <h2 class="sec-title">Loved by garage owners<br>across India</h2>
     </div>
     <div class="testi-grid">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Before BizaroHQ we were running on paper registers and WhatsApp. Now everything is digital — invoices, job cards, even reminders. Our customers love it."</p>
-        <div class="testi-author">
-          <div class="author-avatar">RK</div>
-          <div>
-            <div class="author-name">Rajesh Kumar</div>
-            <div class="author-role">Owner, Kumar Auto Works · Pune</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"The inventory alerts saved us from running out of critical parts multiple times. Revenue tracking is so clear now — I can see exactly which services are most profitable."</p>
-        <div class="testi-author">
-          <div class="author-avatar">AS</div>
-          <div>
-            <div class="author-name">Arjun Sharma</div>
-            <div class="author-role">Owner, SpeedFix Motors · Mumbai</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"We manage 3 branches with BizaroHQ. The multi-location dashboard saves me hours every week. Setup took less than a day for all three locations."</p>
-        <div class="testi-author">
-          <div class="author-avatar">PM</div>
-          <div>
-            <div class="author-name">Priya Mehta</div>
-            <div class="author-role">Director, City Auto Care Group · Bangalore</div>
-          </div>
-        </div>
-      </div>
+      <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"Before BizaroHQ we were running on paper registers and WhatsApp. Now everything is digital — invoices, job cards, even reminders. Our customers love it."</p><div class="t-author"><div class="avatar">RK</div><div><div class="a-name">Rajesh Kumar</div><div class="a-role">Owner, Kumar Auto Works · Pune</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"The inventory alerts saved us from running out of critical parts multiple times. Revenue tracking is so clear — I can see which services are most profitable."</p><div class="t-author"><div class="avatar">AS</div><div><div class="a-name">Arjun Sharma</div><div class="a-role">Owner, SpeedFix Motors · Mumbai</div></div></div></div>
+      <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"We manage 3 branches with BizaroHQ. The multi-location dashboard saves me hours every week. Setup took less than a day for all three locations."</p><div class="t-author"><div class="avatar">PM</div><div><div class="a-name">Priya Mehta</div><div class="a-role">Director, City Auto Care Group · Bangalore</div></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="contact">
+<section class="cta-sec" id="contact">
   <div class="cta-bg"></div>
-  <div class="section-inner">
-    <h2 class="cta-title">Ready to go <span class="gradient-text">paperless</span>?</h2>
-    <p class="cta-sub">Join 1,200+ garages already running smarter with BizaroHQ. Start your free 14-day trial today — no credit card required.</p>
+  <div class="wrap cta-inner">
+    <h2 class="cta-title">Ready to go <span class="grad">paperless</span>?</h2>
+    <p class="cta-sub">Join 1,200+ garages running smarter with BizaroHQ. Start your free 14-day trial — no credit card required.</p>
     <div class="cta-btns">
-      <a href="register.html" class="btn-hero-primary">Create Free Account <i class='bx bx-right-arrow-alt'></i></a>
-      <a href="https://wa.me/918802929885" class="btn-hero-ghost"><i class='bx bxl-whatsapp'></i> Talk to us on WhatsApp</a>
+      <a href="register.html" class="btn-hp">Create Free Account <i class='bx bx-right-arrow-alt'></i></a>
+      <a href="https://wa.me/918802929885" class="btn-hg"><i class='bx bxl-whatsapp'></i> Talk on WhatsApp</a>
     </div>
     <div class="cta-trust">
-      <div class="cta-trust-item"><i class='bx bx-check'></i> No credit card needed</div>
-      <div class="cta-trust-item"><i class='bx bx-check'></i> Free 14-day trial</div>
-      <div class="cta-trust-item"><i class='bx bx-check'></i> Cancel anytime</div>
-      <div class="cta-trust-item"><i class='bx bx-check'></i> Setup in &lt; 5 minutes</div>
+      <div class="ct-item"><i class='bx bx-check'></i> No credit card</div>
+      <div class="ct-item"><i class='bx bx-check'></i> 14-day free trial</div>
+      <div class="ct-item"><i class='bx bx-check'></i> Cancel anytime</div>
+      <div class="ct-item"><i class='bx bx-check'></i> Setup in &lt; 5 min</div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="logo-wrap">
-        <div class="logo-icon">B</div>
-        <span>BizaroHQ</span>
-      </div>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="fw"><div class="logo-icon">B</div><span class="fn">BizaroHQ</span></div>
       <p>From paper records to digital assets. The smartest workshop management software for garages and service centers across India.</p>
-      <div class="footer-social">
-        <a href="#" class="soc-btn"><i class='bx bxl-facebook'></i></a>
-        <a href="#" class="soc-btn"><i class='bx bxl-instagram'></i></a>
-        <a href="#" class="soc-btn"><i class='bx bxl-twitter'></i></a>
-        <a href="https://wa.me/918802929885" class="soc-btn"><i class='bx bxl-whatsapp'></i></a>
+      <div class="soc">
+        <a href="#" class="soc-a"><i class='bx bxl-facebook'></i></a>
+        <a href="#" class="soc-a"><i class='bx bxl-instagram'></i></a>
+        <a href="#" class="soc-a"><i class='bx bxl-twitter'></i></a>
+        <a href="https://wa.me/918802929885" class="soc-a"><i class='bx bxl-whatsapp'></i></a>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>Product</h4>
-      <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#solutions">Solutions</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#">Download App</a></li>
-        <li><a href="#">Changelog</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#">Partner Program</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Refund Policy</a></li>
-        <li><a href="#">Cookie Policy</a></li>
-      </ul>
-    </div>
+    <div class="foot-col"><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#solutions">Solutions</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Download App</a></li></ul></div>
+    <div class="foot-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="foot-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
+  <div class="foot-bottom">
     <span>© 2026 BizaroHQ. All rights reserved.</span>
     <span>Made with ❤️ in India</span>
     <span><a href="#">Privacy</a> · <a href="#">Terms</a></span>
   </div>
 </footer>
 
-<!-- WhatsApp float -->
-<a href="https://wa.me/918802929885" class="wa-float">
-  <i class='bx bxl-whatsapp' style="font-size:22px;"></i> Support
+<a href="https://wa.me/918802929885" class="wa">
+  <i class='bx bxl-whatsapp' style="font-size:20px"></i>
+  <span class="wa-txt">Support</span>
 </a>
 
 <script>
-function toggleMenu() {
-  const m = document.getElementById('mobileMenu');
-  m.classList.toggle('open');
+let menuOpen=false;
+function toggleMenu(){
+  menuOpen=!menuOpen;
+  document.getElementById('mobileMenu').classList.toggle('open',menuOpen);
+  document.getElementById('ham-ico').className=menuOpen?'bx bx-x':'bx bx-menu';
 }
-
-function filterSol(cat, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+function closeMenu(){
+  menuOpen=false;
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('ham-ico').className='bx bx-menu';
+}
+function filterSol(cat,btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.sol-card').forEach(c => {
-    if (cat === 'all' || c.dataset.cat === cat) {
-      c.style.display = 'block';
-    } else {
-      c.style.display = 'none';
-    }
+  document.querySelectorAll('.sol-card').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
   });
 }
-
-// Scroll-based nav shadow
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('mainNav');
-  if (window.scrollY > 20) {
-    nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
-  } else {
-    nav.style.boxShadow = 'none';
-  }
-});
-
-// Close mobile menu when link clicked
-document.querySelectorAll('.mobile-menu a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.remove('open');
-  });
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.boxShadow=window.scrollY>20?'0 4px 20px rgba(0,0,0,0.07)':'none';
 });
 </script>
 </body>
