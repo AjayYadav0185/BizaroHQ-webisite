@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BizaroHQ | POS & Garage Management Software</title>
+<title>BizaroHQ — India's #1 POS & Garage Management Software</title>
+<meta name="description" content="BizaroHQ is India's leading POS and garage management software. Manage billing, inventory, GST, accounting, and analytics for restaurants and auto repair workshops.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <style>
 * {
@@ -15,17 +16,18 @@
 }
 
 :root {
-  --primary: #1e40af;
-  --primary-dark: #1e3a8a;
-  --accent-warm: #f97316;
-  --accent-teal: #14b8a6;
+  --primary: #0052cc;
+  --primary-light: #4d94ff;
+  --primary-dark: #003d99;
+  --accent: #00d9ff;
+  --accent-warm: #ff6b35;
+  --success: #2dd4bf;
   --text-dark: #0f172a;
   --text-light: #64748b;
+  --bg-dark: #0f1419;
   --bg-light: #f8fafc;
-  --bg-white: #ffffff;
+  --bg-lighter: #f1f5f9;
   --border: #e2e8f0;
-  --success: #22c55e;
-  --orange: #fb923c;
 }
 
 html {
@@ -33,10 +35,11 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: var(--text-dark);
-  background: var(--bg-white);
+  background: var(--bg-light);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ═══════ NAVIGATION ═══════ */
@@ -45,10 +48,11 @@ nav {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(248, 250, 252, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  padding: 14px 5%;
+  padding: 16px 5%;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 
 .nav-inner {
@@ -57,59 +61,73 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 40px;
 }
 
 .logo {
-  font-family: "Merriweather", serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--primary);
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   white-space: nowrap;
 }
 
 .logo i {
-  font-size: 28px;
-  background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 32px;
+  color: var(--primary);
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 32px;
+  gap: 40px;
   flex: 1;
-  justify-content: center;
 }
 
-nav a {
+nav ul a {
   text-decoration: none;
   color: var(--text-light);
   font-size: 14px;
   font-weight: 500;
   transition: color 0.3s;
+  position: relative;
 }
 
-nav a:hover {
+nav ul a:hover {
   color: var(--primary);
+}
+
+nav ul a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s;
+}
+
+nav ul a:hover::after {
+  width: 100%;
 }
 
 .nav-cta {
   display: flex;
   gap: 12px;
-  white-space: nowrap;
 }
 
 .btn {
-  padding: 9px 18px;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   border: none;
@@ -118,44 +136,48 @@ nav a:hover {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
-.btn-secondary {
+.btn-outline {
   border: 1.5px solid var(--border);
   color: var(--text-dark);
-  background: var(--bg-white);
+  background: transparent;
 }
 
-.btn-secondary:hover {
+.btn-outline:hover {
   border-color: var(--primary);
-  background: var(--bg-light);
+  color: var(--primary);
+  background: rgba(0, 82, 204, 0.05);
 }
 
 .btn-primary {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2);
+  box-shadow: 0 6px 25px rgba(0, 82, 204, 0.4);
 }
 
-.menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--text-dark);
+.btn-secondary {
+  background: linear-gradient(135deg, var(--accent) 0%, #00c4ff 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
 }
 
-/* ═══════ HERO ═══════ */
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 217, 255, 0.4);
+}
+
+/* ═══════ HERO SECTION ═══════ */
 .hero {
+  margin-top: 80px;
   padding: 100px 5% 80px;
-  margin-top: 60px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, rgba(0, 82, 204, 0.05) 0%, rgba(0, 217, 255, 0.05) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -165,10 +187,22 @@ nav a:hover {
   position: absolute;
   top: -50%;
   right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 82, 204, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: rgba(30, 64, 175, 0.08);
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -177,9 +211,6 @@ nav a:hover {
   margin: 0 auto;
   position: relative;
   z-index: 1;
-}
-
-.hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
@@ -187,26 +218,26 @@ nav a:hover {
 }
 
 .hero-text h1 {
-  font-family: "Merriweather", serif;
-  font-size: 52px;
-  font-weight: 700;
+  font-family: "Playfair Display", serif;
+  font-size: 56px;
+  font-weight: 800;
   line-height: 1.2;
   margin-bottom: 20px;
   color: var(--text-dark);
 }
 
-.hero-text h1 .highlight {
-  background: linear-gradient(90deg, var(--primary), var(--accent-teal));
+.hero-text h1 .grad {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .hero-text p {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--text-light);
   margin-bottom: 32px;
-  line-height: 1.7;
+  line-height: 1.8;
   max-width: 520px;
 }
 
@@ -219,21 +250,27 @@ nav a:hover {
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  padding-top: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding-top: 40px;
   border-top: 1px solid var(--border);
 }
 
 .stat {
-  text-align: center;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--border);
 }
 
 .stat-num {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
 }
 
 .stat-label {
@@ -244,73 +281,111 @@ nav a:hover {
 
 .hero-visual {
   position: relative;
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
 }
 
-.card-showcase {
+.dashboard-card {
   background: white;
-  border-radius: 12px;
-  padding: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--border);
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
-  transition: all 0.3s;
+  animation: float 3s ease-in-out infinite;
 }
 
-.card-showcase:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
-.card-header {
+.dashboard-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 20px 25px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
 }
 
-.card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(20, 184, 166, 0.1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-
-.card-title {
+.dashboard-title {
+  font-size: 15px;
   font-weight: 600;
-  font-size: 14px;
-  color: var(--text-dark);
 }
 
-.card-item {
+.dashboard-live {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
+  gap: 8px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background: #2dd4bf;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.dashboard-body {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.metric {
+  padding: 18px;
+  background: var(--bg-light);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.metric-label {
+  font-size: 11px;
   color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
 }
 
-.card-item:last-child {
-  border: none;
+.metric-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 4px;
 }
 
-.card-item i {
-  color: var(--accent-teal);
-  font-size: 16px;
-  flex-shrink: 0;
+.metric-change {
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 600;
 }
 
-/* ═══════ PRODUCTS SECTION ═══════ */
-.products {
+.metric-change.negative {
+  color: #ff6b6b;
+}
+
+/* ═══════ SECTIONS ═══════ */
+.section {
   padding: 100px 5%;
-  background: white;
+}
+
+.section.dark {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1f2e 100%);
+}
+
+.section-inner {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .section-header {
@@ -322,82 +397,173 @@ nav a:hover {
   display: inline-block;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 16px;
 }
 
-.section-header h2 {
-  font-family: "Merriweather", serif;
-  font-size: 42px;
-  font-weight: 700;
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
   margin-bottom: 16px;
+  color: var(--text-dark);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section.dark .section-title {
+  color: white;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.section.dark .section-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ═══════ FEATURES GRID ═══════ */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.feature-card {
+  padding: 32px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 12px 40px rgba(0, 82, 204, 0.12);
+  transform: translateY(-8px);
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.feature-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
   color: var(--text-dark);
 }
 
-.section-header p {
-  font-size: 16px;
+.feature-card p {
+  font-size: 13px;
   color: var(--text-light);
-  max-width: 560px;
-  margin: 0 auto;
+  line-height: 1.8;
 }
 
+/* ═══════ PRODUCTS SECTION ═══════ */
 .products-grid {
-  max-width: 1400px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 40px;
+  margin-top: 60px;
 }
 
 .product-card {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: white;
   border-radius: 16px;
-  padding: 48px 40px;
+  padding: 48px;
   border: 1px solid var(--border);
   transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 82, 204, 0.05), rgba(0, 217, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(30, 64, 175, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 82, 204, 0.15);
+  transform: translateY(-8px);
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-card-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .product-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  color: white;
+  font-size: 50px;
   margin-bottom: 24px;
+  display: inline-block;
+}
+
+.product-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
 }
 
 .product-card h3 {
-  font-family: "Merriweather", serif;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--text-dark);
-}
-
-.product-card .subtitle {
-  font-size: 13px;
-  color: var(--accent-warm);
-  font-weight: 600;
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  font-weight: 800;
   margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--text-dark);
 }
 
 .product-desc {
   font-size: 15px;
-  line-height: 1.8;
   color: var(--text-light);
+  line-height: 1.8;
   margin-bottom: 32px;
 }
 
@@ -409,23 +575,29 @@ nav a:hover {
 .features-list li {
   display: flex;
   gap: 12px;
-  margin-bottom: 14px;
+  padding: 12px 0;
   font-size: 14px;
   color: var(--text-dark);
+  border-bottom: 1px solid var(--border);
+}
+
+.features-list li:last-child {
+  border: none;
 }
 
 .features-list i {
   color: var(--success);
   font-size: 18px;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .product-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
-  background: var(--primary);
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
   border-radius: 8px;
   text-decoration: none;
@@ -435,130 +607,11 @@ nav a:hover {
 }
 
 .product-cta:hover {
-  background: var(--primary-dark);
   transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0, 82, 204, 0.3);
 }
 
-/* ═══════ FEATURES COMPARISON ═══════ */
-.comparison {
-  padding: 100px 5%;
-  background: var(--bg-light);
-}
-
-.comparison-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.comparison-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
-  margin-top: 60px;
-}
-
-.comparison-card {
-  background: white;
-  border-radius: 12px;
-  padding: 32px;
-  border: 1px solid var(--border);
-}
-
-.comparison-card h4 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.comparison-card i {
-  font-size: 24px;
-  background: linear-gradient(135deg, var(--primary), var(--accent-teal));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.comparison-list {
-  list-style: none;
-}
-
-.comparison-list li {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-  color: var(--text-light);
-}
-
-.comparison-list li:last-child {
-  border: none;
-}
-
-/* ═══════ INDUSTRY FOCUS ═══════ */
-.industries {
-  padding: 100px 5%;
-  background: white;
-}
-
-.industries-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.industries-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 60px;
-}
-
-.industry-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 32px 24px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-.industry-card:hover {
-  border-color: var(--primary);
-  box-shadow: 0 12px 24px rgba(30, 64, 175, 0.08);
-  transform: translateY(-4px);
-}
-
-.industry-icon {
-  font-size: 40px;
-  margin-bottom: 16px;
-}
-
-.industry-card h4 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 8px;
-}
-
-.industry-card p {
-  font-size: 13px;
-  color: var(--text-light);
-  line-height: 1.6;
-}
-
-/* ═══════ PRICING ═══════ */
-.pricing {
-  padding: 100px 5%;
-  background: var(--bg-light);
-}
-
-.pricing-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
+/* ═══════ PRICING SECTION ═══════ */
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -569,38 +622,45 @@ nav a:hover {
 .price-card {
   background: white;
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 40px 32px;
+  border-radius: 16px;
+  padding: 40px;
   text-align: center;
   transition: all 0.3s;
   position: relative;
 }
 
-.price-card:nth-child(2) {
+.price-card.popular {
   border: 2px solid var(--primary);
   transform: scale(1.05);
+  box-shadow: 0 20px 60px rgba(0, 82, 204, 0.15);
 }
 
-.price-card:nth-child(2)::before {
+.price-card.popular::before {
   content: "MOST POPULAR";
   position: absolute;
-  top: -12px;
+  top: -15px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
-  padding: 6px 14px;
+  padding: 8px 20px;
   border-radius: 20px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .price-card:hover {
-  box-shadow: 0 16px 32px rgba(30, 64, 175, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 82, 204, 0.12);
+  transform: translateY(-4px);
 }
 
-.price-plan-name {
+.price-card.popular:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.plan-name {
   font-size: 16px;
   font-weight: 700;
   color: var(--text-dark);
@@ -609,96 +669,94 @@ nav a:hover {
   letter-spacing: 0.5px;
 }
 
-.price-amount {
-  font-family: "Merriweather", serif;
-  font-size: 48px;
-  font-weight: 700;
-  color: var(--primary);
+.plan-price {
+  font-family: "Playfair Display", serif;
+  font-size: 52px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 8px;
 }
 
-.price-currency {
-  font-size: 20px;
+.plan-price sup {
+  font-size: 24px;
+  font-weight: 600;
 }
 
-.price-period {
+.plan-period {
   font-size: 13px;
   color: var(--text-light);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
-.price-features {
+.plan-features {
   text-align: left;
   list-style: none;
   margin: 32px 0;
+  padding: 32px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 24px 0;
 }
 
-.price-features li {
-  padding: 10px 0;
-  font-size: 14px;
+.plan-features li {
+  padding: 12px 0;
+  font-size: 13px;
   color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.price-features li i {
+.plan-features i {
   color: var(--success);
-  margin-right: 10px;
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
-.price-features li.unavailable {
+.plan-features li.unavailable {
   color: #cbd5e1;
 }
 
-.price-features li.unavailable i {
+.plan-features li.unavailable i {
   color: #cbd5e1;
 }
 
-.price-cta {
-  padding: 14px 28px;
+.plan-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
-  text-decoration: none;
   border: none;
   cursor: pointer;
   transition: all 0.3s;
-  width: 100%;
-  display: inline-block;
 }
 
-.price-cta-primary {
-  background: var(--primary);
+.plan-btn.primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
 }
 
-.price-cta-primary:hover {
-  background: var(--primary-dark);
+.plan-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 82, 204, 0.3);
 }
 
-.price-cta-secondary {
+.plan-btn.secondary {
   background: transparent;
   color: var(--primary);
   border: 1.5px solid var(--primary);
 }
 
-.price-cta-secondary:hover {
+.plan-btn.secondary:hover {
   background: var(--primary);
   color: white;
 }
 
 /* ═══════ TESTIMONIALS ═══════ */
-.testimonials {
-  padding: 100px 5%;
-  background: white;
-}
-
-.testimonials-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -707,15 +765,21 @@ nav a:hover {
 }
 
 .testimonial-card {
-  background: var(--bg-light);
+  background: white;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 32px;
-  border: 1px solid var(--border);
+  transition: all 0.3s;
 }
 
-.testimonial-rating {
+.testimonial-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 82, 204, 0.12);
+  transform: translateY(-4px);
+}
+
+.rating {
   color: #fbbf24;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 2px;
   margin-bottom: 16px;
 }
@@ -724,21 +788,21 @@ nav a:hover {
   font-size: 14px;
   line-height: 1.8;
   color: var(--text-dark);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-style: italic;
 }
 
-.testimonial-author {
+.author-info {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.author-avatar {
-  width: 40px;
-  height: 40px;
+.avatar {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -747,64 +811,128 @@ nav a:hover {
   font-size: 16px;
 }
 
-.author-info {
-  flex: 1;
-}
-
-.author-name {
-  font-weight: 700;
+.author-details h4 {
   font-size: 14px;
+  font-weight: 700;
   color: var(--text-dark);
+  margin-bottom: 2px;
 }
 
-.author-role {
+.author-details p {
   font-size: 12px;
   color: var(--text-light);
 }
 
-/* ═══════ CTA SECTION ═══════ */
-.final-cta {
-  padding: 80px 5%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  text-align: center;
-  color: white;
+/* ═══════ FAQ SECTION ═══════ */
+.faq-container {
+  max-width: 900px;
+  margin: 60px auto 0;
 }
 
-.final-cta-inner {
+.faq-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.faq-item:hover {
+  box-shadow: 0 8px 24px rgba(0, 82, 204, 0.1);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.faq-icon {
+  font-size: 20px;
+  color: var(--primary);
+  transition: transform 0.3s;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  display: none;
+  padding: 0 24px 24px;
+  color: var(--text-light);
+  line-height: 1.8;
+  border-top: 1px solid var(--border);
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+/* ═══════ CTA SECTION ═══════ */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 80px 5%;
+  text-align: center;
+  border-radius: 20px;
+  margin: 100px 5% 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(0, 217, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-inner {
   max-width: 700px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-.final-cta h2 {
-  font-family: "Merriweather", serif;
-  font-size: 42px;
-  font-weight: 700;
+.cta-section h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 44px;
+  font-weight: 800;
   margin-bottom: 16px;
 }
 
-.final-cta p {
+.cta-section p {
   font-size: 16px;
   opacity: 0.9;
   margin-bottom: 32px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-.final-cta-buttons {
+.cta-buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.final-cta .btn {
-  min-width: 160px;
-}
-
 /* ═══════ FOOTER ═══════ */
 footer {
-  background: #0f172a;
-  color: #94a3b8;
-  padding: 60px 5% 20px;
+  background: var(--bg-dark);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 60px 5% 30px;
+  margin-top: 100px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-inner {
@@ -814,7 +942,7 @@ footer {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
   gap: 40px;
   margin-bottom: 40px;
 }
@@ -823,9 +951,9 @@ footer {
   color: white;
   font-weight: 700;
   margin-bottom: 16px;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .footer-col ul {
@@ -833,13 +961,13 @@ footer {
 }
 
 .footer-col ul li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .footer-col ul li a {
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   transition: color 0.3s;
 }
 
@@ -847,86 +975,109 @@ footer {
   color: white;
 }
 
+.footer-col.contact {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.footer-col.contact a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
+  padding-top: 30px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* ═══════ RESPONSIVE ═══════ */
-@media (max-width: 768px) {
-  nav ul,
-  .nav-cta {
-    display: none;
-  }
-
-  .menu-btn {
-    display: block;
-  }
-
-  .hero-grid {
+@media (max-width: 1024px) {
+  .hero-content {
     grid-template-columns: 1fr;
   }
 
-  .hero-text h1 {
-    font-size: 36px;
-  }
-
-  .hero-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-visual {
-    display: none;
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .products-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .comparison-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .industries-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .pricing-grid {
     grid-template-columns: 1fr;
   }
 
-  .price-card:nth-child(2) {
+  .price-card.popular {
     transform: scale(1);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul,
+  .nav-cta {
+    display: none;
+  }
+
+  .hero {
+    margin-top: 70px;
+    padding: 60px 4%;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 36px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-body {
+    grid-template-columns: 1fr;
   }
 
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
   .hero-cta {
     flex-direction: column;
-    gap: 12px;
   }
 
   .btn {
     justify-content: center;
   }
 
-  .final-cta-buttons {
+  .cta-buttons {
     flex-direction: column;
-    gap: 12px;
   }
 
-  .final-cta-buttons .btn {
+  .cta-buttons .btn {
     width: 100%;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -939,146 +1090,129 @@ footer {
     font-size: 20px;
   }
 
-  .hero {
-    padding: 80px 4% 60px;
+  .section {
+    padding: 60px 4%;
   }
 
   .hero-text h1 {
     font-size: 28px;
   }
 
-  .section-header h2 {
-    font-size: 32px;
+  .section-title {
+    font-size: 28px;
   }
 
   .product-card {
     padding: 32px 24px;
   }
 
-  .products {
-    padding: 60px 4%;
+  .features-list li {
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .comparison {
-    padding: 60px 4%;
-  }
-
-  .industries {
-    padding: 60px 4%;
-  }
-
-  .industries-grid {
+  .pricing-grid {
     grid-template-columns: 1fr;
   }
 
-  .pricing {
-    padding: 60px 4%;
+  .cta-section {
+    margin: 60px 4% 0;
+    border-radius: 12px;
   }
 
-  .testimonials {
-    padding: 60px 4%;
-  }
-
-  .final-cta {
-    padding: 60px 4%;
-  }
-
-  .final-cta h2 {
+  .cta-section h2 {
     font-size: 32px;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
   }
 }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
+
+
+
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <i class="bx bx-rocket"></i>BizaroHQ
+      <i class="bx bxs-rocket"></i>BizaroHQ
     </a>
     <ul>
-      <li><a href="#products">Products</a></li>
       <li><a href="#features">Features</a></li>
-      <li><a href="#industries">Industries</a></li>
+      <li><a href="#products">Products</a></li>
       <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="#" class="btn btn-secondary">Log In</a>
-      <a href="#" class="btn btn-primary">Start Free</a>
+      <a href="#" class="btn btn-outline">Log In</a>
+      <a href="#" class="btn btn-primary">Get Started Free</a>
     </div>
-    <button class="menu-btn"><i class="bx bx-menu"></i></button>
   </div>
 </nav>
 
-<!-- HERO -->
+
+
+
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <h1>Complete Business Management for <span class="highlight">Restaurants & Garages</span></h1>
-        <p>Choose BizaroHQ POS for food outlets or GMS for garage management. Streamline operations, increase efficiency, and grow your business with our powerful, India-first software solutions.</p>
-        <div class="hero-cta">
-          <a href="#" class="btn btn-primary">Explore POS for Restaurants</a>
-          <a href="#" class="btn btn-secondary">Explore GMS for Garages</a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat">
-            <div class="stat-num">50K+</div>
-            <div class="stat-label">Active Users</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">₹2000Cr+</div>
-            <div class="stat-label">Transactions</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">99.99%</div>
-            <div class="stat-label">Uptime SLA</div>
-          </div>
-        </div>
+    <div class="hero-text">
+      <h1>India's #1 Business Management Software for <span class="grad">Food & Auto Repair</span></h1>
+      <p>BizaroHQ is the complete POS and garage management platform powering restaurants, cafes, and auto repair workshops across India. GST billing, inventory tracking, and real-time analytics — all in one powerful solution.</p>
+      
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary">Get Started Free</a>
+        <a href="#" class="btn btn-secondary">Book a Demo</a>
       </div>
 
-      <div class="hero-visual">
-        <div class="card-showcase">
-          <div class="card-header">
-            <div class="card-icon">🍽️</div>
-            <div class="card-title">POS Dashboard</div>
-          </div>
-          <div class="card-item">
-            <i class="bx bx-check-circle"></i>
-            <span>245 Orders today</span>
-          </div>
-          <div class="card-item">
-            <i class="bx bx-check-circle"></i>
-            <span>₹89,450 Revenue</span>
-          </div>
-          <div class="card-item">
-            <i class="bx bx-check-circle"></i>
-            <span>Avg ticket: ₹365</span>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">50K+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">₹2000Cr+</div>
+          <div class="stat-label">Transactions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">28+</div>
+          <div class="stat-label">States Covered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">99.99%</div>
+          <div class="stat-label">Uptime SLA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <div class="dashboard-title">Dashboard Overview</div>
+          <div class="dashboard-live">
+            <div class="live-dot"></div>
+            Live
           </div>
         </div>
-
-        <div class="card-showcase">
-          <div class="card-header">
-            <div class="card-icon">🔧</div>
-            <div class="card-title">GMS Dashboard</div>
+        <div class="dashboard-body">
+          <div class="metric">
+            <div class="metric-label">Total Sales</div>
+            <div class="metric-value">₹12.4L</div>
+            <div class="metric-change">+12.5%</div>
           </div>
-          <div class="card-item">
-            <i class="bx bx-check-circle"></i>
-            <span>42 Job cards active</span>
+          <div class="metric">
+            <div class="metric-label">Orders Today</div>
+            <div class="metric-value">1,247</div>
+            <div class="metric-change">+8.2%</div>
           </div>
-          <div class="card-item">
-            <i class="bx bx-check-circle"></i>
-            <span>₹156,800 Outstanding</span>
+          <div class="metric">
+            <div class="metric-label">Job Cards</div>
+            <div class="metric-value">342</div>
+            <div class="metric-change">+24</div>
           </div>
-          <div class="card-item">
-            <i class="bx bx-check-circle"></i>
-            <span>8 vehicles waiting</span>
+          <div class="metric">
+            <div class="metric-label">Customers</div>
+            <div class="metric-value">8,621</div>
+            <div class="metric-change negative">-2.1%</div>
           </div>
         </div>
       </div>
@@ -1086,231 +1220,217 @@ footer {
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section class="products" id="products">
-  <div class="section-header">
-    <span class="section-label">Two Powerful Solutions</span>
-    <h2>Choose Your Perfect Fit</h2>
-    <p>BizaroHQ offers industry-specific solutions tailored to your business needs with powerful features, easy integration, and exceptional support.</p>
-  </div>
 
-  <div class="products-grid">
-    <!-- POS Product -->
-    <div class="product-card">
-      <div class="product-icon">🍽️</div>
-      <span class="subtitle">For Food & Beverage</span>
-      <h3>BizaroHQ POS</h3>
-      <p class="product-desc">Lightning-fast point-of-sale system designed for restaurants, cafes, and food outlets. Process orders, manage payments, and control kitchen operations seamlessly.</p>
-      <ul class="features-list">
-        <li><i class="bx bx-check-circle"></i>Fast order & payment processing</li>
-        <li><i class="bx bx-check-circle"></i>Kitchen display system (KDS)</li>
-        <li><i class="bx bx-check-circle"></i>Real-time inventory tracking</li>
-        <li><i class="bx bx-check-circle"></i>Multi-location dashboard</li>
-        <li><i class="bx bx-check-circle"></i>Delivery platform integration</li>
-        <li><i class="bx bx-check-circle"></i>Detailed sales analytics</li>
-      </ul>
-      <a href="#" class="product-cta">Explore POS <i class="bx bx-right-arrow-alt"></i></a>
-    </div>
 
-    <!-- GMS Product -->
-    <div class="product-card">
-      <div class="product-icon">🔧</div>
-      <span class="subtitle">For Auto Repair & Service</span>
-      <h3>BizaroHQ GMS</h3>
-      <p class="product-desc">Complete garage management software like AutoRox. Track job cards, invoices, customer vehicles, parts inventory, and technician performance from one dashboard.</p>
-      <ul class="features-list">
-        <li><i class="bx bx-check-circle"></i>Digital job card management</li>
-        <li><i class="bx bx-check-circle"></i>Vehicle service history</li>
-        <li><i class="bx bx-check-circle"></i>GST invoicing & WhatsApp share</li>
-        <li><i class="bx bx-check-circle"></i>Parts & inventory tracking</li>
-        <li><i class="bx bx-check-circle"></i>Technician workload management</li>
-        <li><i class="bx bx-check-circle"></i>Revenue & customer analytics</li>
-      </ul>
-      <a href="#" class="product-cta">Explore GMS <i class="bx bx-right-arrow-alt"></i></a>
-    </div>
-  </div>
-</section>
 
-<!-- FEATURES COMPARISON -->
-<section class="comparison" id="features">
-  <div class="comparison-inner">
+<section class="section" id="features">
+  <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Core Capabilities</span>
-      <h2>What Both Solutions Offer</h2>
-      <p>Shared features across both products provide a unified, professional business management experience.</p>
+      <div class="section-label">Core Features</div>
+      <h2 class="section-title">Complete POS & Business Management Software</h2>
+      <p class="section-desc">One powerful platform that replaces spreadsheets, billing registers, and disconnected tools. Built specifically for Indian businesses with GST compliance and offline mode.</p>
     </div>
 
-    <div class="comparison-grid">
-      <div class="comparison-card">
-        <h4><i class="bx bx-list-check"></i> Order & Job Management</h4>
-        <ul class="comparison-list">
-          <li>Digital order/job creation</li>
-          <li>Real-time status updates</li>
-          <li>Customer notifications</li>
-          <li>Complete order history</li>
-          <li>Batch processing</li>
-        </ul>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>Billing & Invoicing</h3>
+        <p>Create GST-ready invoices, bills, and receipts in seconds. Print, email, or WhatsApp share directly from POS.</p>
       </div>
-
-      <div class="comparison-card">
-        <h4><i class="bx bx-bar-chart-alt"></i> Analytics & Reporting</h4>
-        <ul class="comparison-list">
-          <li>Daily business dashboard</li>
-          <li>Revenue analytics</li>
-          <li>Customer insights</li>
-          <li>Staff performance tracking</li>
-          <li>Custom reports & exports</li>
-        </ul>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3>Inventory Management</h3>
+        <p>Real-time stock tracking with low-stock alerts, batch management, and multi-warehouse control.</p>
       </div>
-
-      <div class="comparison-card">
-        <h4><i class="bx bx-user"></i> Customer Management</h4>
-        <ul class="comparison-list">
-          <li>Complete customer database</li>
-          <li>Transaction history</li>
-          <li>Preference tracking</li>
-          <li>Loyalty & rewards</li>
-          <li>Auto reminders & alerts</li>
-        </ul>
+      <div class="feature-card">
+        <div class="feature-icon">🏪</div>
+        <h3>Point of Sale (POS)</h3>
+        <p>Lightning-fast, touch-friendly POS billing with barcode scanning and 100% offline mode.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- INDUSTRIES -->
-<section class="industries" id="industries">
-  <div class="industries-inner">
-    <div class="section-header">
-      <span class="section-label">GMS Compatible Industries</span>
-      <h2>One Software, Many Solutions</h2>
-      <p>BizaroHQ GMS adapts to different service and repair businesses beyond just garages.</p>
-    </div>
-
-    <div class="industries-grid">
-      <div class="industry-card">
-        <div class="industry-icon">🚗</div>
-        <h4>Car Repair</h4>
-        <p>Complete workshop management with job tracking and parts inventory</p>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>GST & Tax Management</h3>
+        <p>Automated GST calculations, GSTR-1 and GSTR-3B ready reports, and e-invoice support.</p>
       </div>
-      <div class="industry-card">
-        <div class="industry-icon">🏍️</div>
-        <h4>Bike Service</h4>
-        <p>Streamline two-wheeler servicing and maintenance operations</p>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Accounting & Bookkeeping</h3>
+        <p>Built-in ledger management, expense tracking, P&L statements, and cash flow reports.</p>
       </div>
-      <div class="industry-card">
-        <div class="industry-icon">❄️</div>
-        <h4>AC Service</h4>
-        <p>Manage air-conditioner installation and repair jobs</p>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Customer Management</h3>
+        <p>Track customer purchase history, set credit limits, manage preferences, and send reminders.</p>
       </div>
-      <div class="industry-card">
-        <div class="industry-icon">🔌</div>
-        <h4>Electrical Repair</h4>
-        <p>Track electrical service jobs and customer maintenance history</p>
+      <div class="feature-card">
+        <div class="feature-icon">💳</div>
+        <h3>Sales & Purchase Tracking</h3>
+        <p>Record every sale and purchase order, monitor profit margins, track pending payments.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Reports & Analytics</h3>
+        <p>Daily sales reports, profit analysis, trend forecasting, and business health dashboards.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="pricing-inner">
+
+
+
+<section class="section" id="products">
+  <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Transparent Pricing</span>
-      <h2>Plans for Every Business Size</h2>
-      <p>No hidden charges, no long-term contracts. Scale up or down anytime, cancel without penalties.</p>
+      <div class="section-label">Specialized Solutions</div>
+      <h2 class="section-title">Industry-Specific Software for Every Business</h2>
+      <p class="section-desc">From restaurants and cafes to auto repair workshops — BizaroHQ delivers specialized solutions tailored to how your industry operates.</p>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-card-inner">
+          <div class="product-icon">🍽️</div>
+          <div class="product-label">For Restaurants & Cafes</div>
+          <h3>BizaroHQ POS</h3>
+          <p class="product-desc">All-in-one restaurant POS software with table orders, KOT, kitchen display system, menu engineering, GST billing, and fast bill settlements. Perfect for restaurants, cafes, and QSRs.</p>
+          <ul class="features-list">
+            <li><i class="bx bx-check-circle"></i> Fast order & payment processing</li>
+            <li><i class="bx bx-check-circle"></i> Kitchen display system (KDS)</li>
+            <li><i class="bx bx-check-circle"></i> Real-time inventory tracking</li>
+            <li><i class="bx bx-check-circle"></i> Table & customer management</li>
+            <li><i class="bx bx-check-circle"></i> Integration with delivery platforms</li>
+            <li><i class="bx bx-check-circle"></i> Detailed sales analytics</li>
+          </ul>
+          <a href="#" class="product-cta">Explore POS <i class="bx bx-right-arrow-alt"></i></a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-card-inner">
+          <div class="product-icon">🔧</div>
+          <div class="product-label">For Auto Repair Shops</div>
+          <h3>BizaroHQ GMS</h3>
+          <p class="product-desc">Automotive workshop management software with digital job cards, spare parts inventory, labor tracking, and service reminders. The best garage billing software for car and bike workshops.</p>
+          <ul class="features-list">
+            <li><i class="bx bx-check-circle"></i> Digital job card management</li>
+            <li><i class="bx bx-check-circle"></i> Vehicle service history</li>
+            <li><i class="bx bx-check-circle"></i> GST invoicing & WhatsApp share</li>
+            <li><i class="bx bx-check-circle"></i> Parts & inventory tracking</li>
+            <li><i class="bx bx-check-circle"></i> Technician workload management</li>
+            <li><i class="bx bx-check-circle"></i> Revenue & customer analytics</li>
+          </ul>
+          <a href="#" class="product-cta">Explore GMS <i class="bx bx-right-arrow-alt"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-desc">No hidden fees. No long-term contracts. Scale up or down anytime, cancel without penalties.</p>
     </div>
 
     <div class="pricing-grid">
-      <!-- Starter Plan -->
       <div class="price-card">
-        <div class="price-plan-name">Starter</div>
-        <div class="price-amount"><span class="price-currency">₹</span>999</div>
-        <div class="price-period">per month</div>
-        <ul class="price-features">
-          <li><i class="bx bx-check-circle"></i> 1 Location/branch</li>
-          <li><i class="bx bx-check-circle"></i> 2 Staff members</li>
-          <li><i class="bx bx-check-circle"></i> Basic reporting</li>
-          <li class="unavailable"><i class="bx bx-x-circle"></i> Advanced analytics</li>
-          <li class="unavailable"><i class="bx bx-x-circle"></i> API access</li>
+        <div class="plan-name">Starter</div>
+        <div class="plan-price"><sup>₹</sup>999</div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li><i class="bx bx-check-circle"></i> 1 Location/Branch</li>
+          <li><i class="bx bx-check-circle"></i> 2 Staff Members</li>
+          <li><i class="bx bx-check-circle"></i> Basic Reporting</li>
+          <li class="unavailable"><i class="bx bx-x-circle"></i> Advanced Analytics</li>
+          <li class="unavailable"><i class="bx bx-x-circle"></i> API Access</li>
+          <li class="unavailable"><i class="bx bx-x-circle"></i> Custom Support</li>
         </ul>
-        <button class="price-cta price-cta-secondary">Get Started</button>
+        <button class="plan-btn secondary">Get Started</button>
       </div>
 
-      <!-- Professional Plan (Popular) -->
-      <div class="price-card">
-        <div class="price-plan-name">Professional</div>
-        <div class="price-amount"><span class="price-currency">₹</span>2,999</div>
-        <div class="price-period">per month</div>
-        <ul class="price-features">
-          <li><i class="bx bx-check-circle"></i> 3 Locations/branches</li>
-          <li><i class="bx bx-check-circle"></i> 10 Staff members</li>
-          <li><i class="bx bx-check-circle"></i> Advanced reporting</li>
-          <li><i class="bx bx-check-circle"></i> Full analytics suite</li>
-          <li class="unavailable"><i class="bx bx-x-circle"></i> API access</li>
+      <div class="price-card popular">
+        <div class="plan-name">Professional</div>
+        <div class="plan-price"><sup>₹</sup>2,999</div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li><i class="bx bx-check-circle"></i> 3 Locations/Branches</li>
+          <li><i class="bx bx-check-circle"></i> 10 Staff Members</li>
+          <li><i class="bx bx-check-circle"></i> Advanced Reporting</li>
+          <li><i class="bx bx-check-circle"></i> Full Analytics Suite</li>
+          <li><i class="bx bx-check-circle"></i> Priority Support</li>
+          <li class="unavailable"><i class="bx bx-x-circle"></i> API Access</li>
         </ul>
-        <button class="price-cta price-cta-primary">Start Free Trial</button>
+        <button class="plan-btn primary">Start Free Trial</button>
       </div>
 
-      <!-- Enterprise Plan -->
       <div class="price-card">
-        <div class="price-plan-name">Enterprise</div>
-        <div class="price-amount"><span class="price-currency">₹</span>9,999<span style="font-size: 16px;">+</span></div>
-        <div class="price-period">per month</div>
-        <ul class="price-features">
-          <li><i class="bx bx-check-circle"></i> Unlimited locations</li>
-          <li><i class="bx bx-check-circle"></i> Unlimited staff</li>
-          <li><i class="bx bx-check-circle"></i> Custom reports</li>
-          <li><i class="bx bx-check-circle"></i> Advanced analytics</li>
-          <li><i class="bx bx-check-circle"></i> API + integrations</li>
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price"><sup>₹</sup>9,999<span style="font-size: 20px;">+</span></div>
+        <div class="plan-period">per month</div>
+        <ul class="plan-features">
+          <li><i class="bx bx-check-circle"></i> Unlimited Locations</li>
+          <li><i class="bx bx-check-circle"></i> Unlimited Staff</li>
+          <li><i class="bx bx-check-circle"></i> Custom Reports</li>
+          <li><i class="bx bx-check-circle"></i> Advanced Analytics</li>
+          <li><i class="bx bx-check-circle"></i> API + Integrations</li>
+          <li><i class="bx bx-check-circle"></i> 24/7 Dedicated Support</li>
         </ul>
-        <button class="price-cta price-cta-secondary">Contact Sales</button>
+        <button class="plan-btn secondary">Contact Sales</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="testimonials-inner">
+
+
+
+<section class="section" id="testimonials">
+  <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Success Stories</span>
-      <h2>Trusted by Restaurants & Garages</h2>
-      <p>See how BizaroHQ is helping businesses across India grow faster and operate smarter.</p>
+      <div class="section-label">Success Stories</div>
+      <h2 class="section-title">Trusted by Restaurants & Garages</h2>
+      <p class="section-desc">See how BizaroHQ is helping businesses across India grow faster and operate smarter.</p>
     </div>
 
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <div class="testimonial-rating">★★★★★</div>
-        <p class="testimonial-text">"BizaroHQ POS cut our order processing time in half. Our kitchen is more organized, customers are happier, and we've seen a 35% jump in table turnover."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">RK</div>
-          <div class="author-info">
-            <div class="author-name">Rajesh Kumar</div>
-            <div class="author-role">Manager, Mumbai Bistro</div>
+        <div class="rating">★★★★★</div>
+        <p class="testimonial-text">"BizaroHQ cut our order processing time in half. Our kitchen is more organized, customers are happier, and we've seen a 35% jump in table turnover."</p>
+        <div class="author-info">
+          <div class="avatar">RK</div>
+          <div class="author-details">
+            <h4>Rajesh Kumar</h4>
+            <p>Owner, Mumbai Bistro</p>
           </div>
         </div>
       </div>
 
       <div class="testimonial-card">
-        <div class="testimonial-rating">★★★★★</div>
-        <p class="testimonial-text">"Before GMS, we were drowning in paper job cards. Now everything is digital—invoices, vehicle history, parts tracking. We've added 3 more technicians without any chaos."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">VS</div>
-          <div class="author-info">
-            <div class="author-name">Vikram Singh</div>
-            <div class="author-role">Owner, Singh Auto Works</div>
+        <div class="rating">★★★★★</div>
+        <p class="testimonial-text">"Before GMS, we managed everything on paper. Now everything is digital — invoices, vehicle history, parts tracking. We've scaled to 4 technicians smoothly."</p>
+        <div class="author-info">
+          <div class="avatar">VS</div>
+          <div class="author-details">
+            <h4>Vikram Singh</h4>
+            <p>Owner, Singh Auto Works</p>
           </div>
         </div>
       </div>
 
       <div class="testimonial-card">
-        <div class="testimonial-rating">★★★★★</div>
-        <p class="testimonial-text">"The analytics dashboard shows exactly which services are profitable. We've optimized our pricing and inventory, and revenue is up 28% in 3 months."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">AJ</div>
-          <div class="author-info">
-            <div class="author-name">Ajay Joshi</div>
-            <div class="author-role">Owner, Quick Fix Garage</div>
+        <div class="rating">★★★★★</div>
+        <p class="testimonial-text">"The analytics dashboard shows exactly which services are profitable. We've optimized pricing and inventory, and revenue is up 28% in 3 months."</p>
+        <div class="author-info">
+          <div class="avatar">AJ</div>
+          <div class="author-details">
+            <h4>Ajay Joshi</h4>
+            <p>Manager, Quick Fix Garage</p>
           </div>
         </div>
       </div>
@@ -1318,67 +1438,180 @@ footer {
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="final-cta-inner">
-    <h2>Ready to Transform Your Business?</h2>
-    <p>Join 50,000+ satisfied users running restaurants and garages with BizaroHQ. Start your free 14-day trial today—no credit card, no questions asked.</p>
-    <div class="final-cta-buttons">
-      <a href="#" class="btn btn-primary" style="background: white; color: var(--primary);">Start Your Free Trial</a>
-      <a href="#" class="btn btn-secondary" style="border-color: white; color: white;">Schedule a Demo</a>
+
+
+
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item active">
+        <div class="faq-question">
+          <span>What is the best POS software in India?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          BizaroHQ is widely regarded as the best POS software in India. It offers offline billing, GST compliance, inventory management, and industry-specific solutions for restaurants, garages, and service businesses — all at affordable pricing. Trusted by 50,000+ users across 28+ states.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How much does POS software cost in India?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          BizaroHQ offers flexible pricing starting from ₹999/month for startups. Professional plans are ₹2,999/month with unlimited users, and enterprise solutions are customized based on your needs. No long-term contracts — cancel anytime.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Does BizaroHQ work without internet?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          Yes! BizaroHQ has 100% offline mode. You can bill customers, manage inventory, and process orders without internet. Data syncs automatically when your connection is back online, ensuring zero downtime for your business.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is BizaroHQ GST compliant?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          Completely! BizaroHQ is fully GST-compliant with automated GST calculations, multi-rate tax handling, GSTR-1 and GSTR-3B ready reports, and e-invoice support. We update automatically with new GST rules.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Which businesses can use BizaroHQ?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          BizaroHQ is designed for restaurants, cafes, auto repair workshops, bike service centers, AC service shops, and other service businesses. Each industry vertical has specialized features and workflows built in.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I get a free demo of BizaroHQ?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          Yes! We offer a 14-day free trial with full access to all features — no credit card required. You can also book a personalized demo with our team to see BizaroHQ in action for your specific industry.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What support does BizaroHQ provide?</span>
+          <i class="bx bx-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          We offer 24/7 customer support via phone, email, WhatsApp, and live chat. Our support team understands your business vertical, speaks your language, and responds quickly to help you succeed.
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+
+
+
+<div class="section-inner" style="padding: 0 5%;">
+  <div class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to Transform Your Business?</h2>
+      <p>Join 50,000+ satisfied users running restaurants and garages with BizaroHQ. Start your free 14-day trial today — no credit card, no questions asked.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary" style="background: white; color: var(--primary);">Start Your Free Trial</a>
+        <a href="#" class="btn btn-secondary">Schedule a Demo</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-col">
         <h4>BizaroHQ</h4>
-        <p>Complete business management software for restaurants and garages across India. Built by entrepreneurs, for entrepreneurs.</p>
+        <p>India's #1 POS software and business management platform. Trusted GST billing, inventory tracking, and offline POS for restaurants, garages, and service businesses across 28+ states.</p>
       </div>
       <div class="footer-col">
-        <h4>Products</h4>
+        <h4>Product</h4>
         <ul>
-          <li><a href="#">BizaroHQ POS</a></li>
-          <li><a href="#">BizaroHQ GMS</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Features</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>Solutions</h4>
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Careers</a></li>
+          <li><a href="#">Restaurant POS</a></li>
+          <li><a href="#">Cafe POS</a></li>
+          <li><a href="#">Garage Management</a></li>
+          <li><a href="#">Bike Service</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
         <ul>
           <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
           <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Cancellation Policy</a></li>
         </ul>
+      </div>
+      <div class="footer-col contact">
+        <h4>Get in Touch</h4>
+        📍 Millennium City, Gurugram<br>
+        Haryana 122001, India<br><br>
+        📧 <a href="mailto:bizarohq@gmail.com">bizarohq@gmail.com</a><br>
+        📞 <a href="tel:+918802929885">+91 8802929885</a><br>
+        💬 <a href="https://wa.me/918802929885">WhatsApp Us</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 BizaroHQ. All rights reserved. Made with ❤️ in India.</p>
+      BizaroHQ . All rights reserved. | Manage · Bill · Grow
     </div>
   </div>
 </footer>
 
 <script>
-// Smooth scroll
+// FAQ Accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', function() {
+    const allItems = document.querySelectorAll('.faq-item');
+    allItems.forEach(i => {
+      if (i !== item) i.classList.remove('active');
+    });
+    item.classList.toggle('active');
+  });
+});
+
+// Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   });
 });
