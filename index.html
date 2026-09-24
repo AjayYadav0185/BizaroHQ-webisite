@@ -77,9 +77,15 @@ nav {
   white-space: nowrap;
 }
 
+
 .logo img {
   max-height: 35px;
   width: auto;
+}
+
+.logo i {
+  font-size: 32px;
+  color: var(--primary);
 }
 
 nav ul {
@@ -902,9 +908,7 @@ footer {
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <img id="navLogo" src="" alt="BizaroHQ" style="display: none;">
-      <i id="navIcon" class="bx bxs-rocket"></i>
-      <span id="logoText">BizaroHQ</span>
+      <img id="navLogo" src="bizarohq.png" alt="BizaroHQ" style="max-height: 35px; width: auto;">
     </a>
     <ul>
       <li><a href="#products">Products</a></li>
@@ -1297,25 +1301,20 @@ footer {
 <script>
 // Logo Configuration
 const logoConfig = {
-  bizarohq: '',
+    bizarohq: 'bizarohq.png',
   bizbay: '',
   bizkay: '',
   bizkite: '',
   biznote: ''
 };
 
-function handleLogos() {
-  const navLogo = document.getElementById('navLogo');
-  const navIcon = document.getElementById('navIcon');
-  const logoText = document.getElementById('logoText');
+  function handleLogos() {
+    const navLogo = document.getElementById('navLogo');
 
-  if (logoConfig.bizarohq) {
-    navLogo.src = logoConfig.bizarohq;
-    navLogo.style.display = 'block';
-    navIcon.style.display = 'none';
-    logoText.style.display = 'none';
+    if (logoConfig.bizarohq) {
+      navLogo.src = logoConfig.bizarohq;
+    }
   }
-}
 
 // FAQ
 document.querySelectorAll('.faq-item').forEach(item => {
